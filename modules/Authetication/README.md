@@ -1,0 +1,1 @@
+Thay đổi model provider trong config/auth.php thành Modules\Authetication\src\Models\User::class để sử dụng table tùy chọn, mặc định lấy bảng users
