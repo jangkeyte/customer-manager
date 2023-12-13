@@ -2,7 +2,7 @@
   <footer class="py-5">
     <div class="row">
       <div class="col-6 col-md-2 mb-3">
-        <h5>Tiêu đề 1</h5>
+        <h5>Giới thiệu</h5>
         <ul class="nav flex-column">
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Nội dung 1</a></li>
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Nội dung 2</a></li>
@@ -13,7 +13,7 @@
       </div>
 
       <div class="col-6 col-md-2 mb-3">
-        <h5>Tiêu đề 2</h5>
+        <h5>Dịch vụ</h5>
         <ul class="nav flex-column">
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Nội dung 1</a></li>
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Nội dung 2</a></li>
@@ -24,7 +24,7 @@
       </div>
 
       <div class="col-6 col-md-2 mb-3">
-        <h5>Tiêu đề 3</h5>
+        <h5>Tin tức</h5>
         <ul class="nav flex-column">
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Nội dung 1</a></li>
           <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-body-secondary">Nội dung 2</a></li>
@@ -36,7 +36,7 @@
 
       <div class="col-md-5 offset-md-1 mb-3">
         <form>
-          <h5>Tiêu đề 4</h5>
+          <h5>Liên hệ</h5>
           <p>Nội dung.</p>
           <div class="d-flex flex-column flex-sm-row w-100 gap-2">
             <label for="newsletter1" class="visually-hidden">Địa chỉ Email</label>

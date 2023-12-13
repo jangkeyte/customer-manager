@@ -1,4 +1,4 @@
-@extends('JangKeyte::layouts.master')
+@extends('JangKeyte::master')
 
 @section('title', 'Trang đăng nhập')
 
@@ -15,9 +15,9 @@
     <div class="row">
         <div class="col-md-6 offset-md-3 mt-5">
             <main class="form-signin w-100 m-auto">
+                <img class="mb-4" src="https://vespatopcom.com/wp-content/themes/vespatopcom/assets/images/logo.png" alt="" width="100%" height="auto">
                 <form method="POST" action="{{ route('user.login') }}" id="adminForm" name="adminForm">           
                     @csrf         
-                    <img class="mb-4" src="https://vespatopcom.com/wp-content/themes/vespatopcom/assets/images/logo.png" alt="" width="100%" height="auto">
                     <h1 class="h3 mb-3 fw-normal">Đăng nhập hệ thống</h1>
                     @if(session()->has('message'))
                         <div class="alert alert-danger">

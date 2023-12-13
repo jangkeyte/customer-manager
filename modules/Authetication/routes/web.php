@@ -25,10 +25,6 @@ Route::group(['middleware' => 'web'], function () {
             return redirect(route('dashboard'));
     });
 
-    Route::get('/dashboard', function () {
-        return "<h1>Hello World</h1>" . auth()->user()->id;
-    })->name('dashboard');
-    
     Route::group(['prefix' => 'user'], function () {
         Route::get('login', [LoginController::class, 'create']);
         Route::post('login', [LoginController::class, 'login'])->name('user.login');

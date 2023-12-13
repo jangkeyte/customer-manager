@@ -24,7 +24,7 @@ return new class extends Migration
             $table->tinyInteger('bo_phan')->default(1);
             $table->tinyInteger('chuc_vu')->default(1);
             $table->string('ghi_chu', 400)->nullable();
-            $table->rememberToken();
+            $table->softDeletes();
             $table->timestamps();            
         });
     }
@@ -36,6 +36,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ktgiang_users');
+        Schema::dropIfExists('ktgiang_staff');
     }
 };

@@ -52,12 +52,12 @@ class LoginController extends Controller
             if(Hash::check($request->password, $user->password)){
                 Auth::login($user, $remember = $request->remember);
                 if(Auth::user()->can('brow-customer')) {
-                    return redirect(route('dashboard'));
+                    return redirect()->route('dashboard');
                 } else {
-                    return redirect(route('dashboard'));
+                    return redirect()->route('dashboard');
                 }
             }
-        }            
+        }
         return redirect()->route('user.login')->with('message', 'Tên đăng nhập hoặc mật khẩu không đúng!!!');
     }
 

@@ -18,8 +18,12 @@ Route::get('/hello', function () {
 })->name('hello');
 
 Route::get('/login', function () {
-    return "<h1>Route login</h1><a href='/user/login'>Đăng nhập ngay</a>";
+    return redirect('/user/login');
 })->name('login');
+
+Route::get('/dashboard', function () {
+    return "<h1>Hello World</h1>";
+})->name('dashboard');
 
 /*
 Route::Fallback(function () {

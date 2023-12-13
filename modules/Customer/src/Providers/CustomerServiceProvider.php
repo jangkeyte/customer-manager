@@ -18,9 +18,10 @@ class CustomerServiceProvider extends ServiceProvider
      * @var string
      */
     private $MODULE_NAME = 'Customer';
+    private $module_path = __DIR__ . '/../../';
     
-    public function register() { 
-
+    public function register() 
+    { 
         // Khai báo middleare
         $middleare = [
             // 'key' => 'namespace của middleare'
@@ -29,7 +30,17 @@ class CustomerServiceProvider extends ServiceProvider
         foreach ($middleare as $key => $value) {
             $this->app['router']->pushMiddlewareToGroup($key, $value);
         }
-        
+           
+        // Khai báo configs
+        if (File::exists( $this->module_path . 'config/app.php' )) {  
+            $this->publishes([
+                $this->module_path . 'config/app.php' => 'App/config/' . $this->MODULE_NAME . '.php',
+            ], 'config');
+            $this->mergeConfigFrom(
+                $this->module_path . 'config/app.php', strtolower($this->MODULE_NAME)
+            );
+        }
+
         // Bind repository cho module Customer
         $authetications = array('Customer', 'Statistics');
         foreach ($authetications as $authetication) {
@@ -45,9 +56,9 @@ class CustomerServiceProvider extends ServiceProvider
         Blade::componentNamespace('Modules\\' . $this->MODULE_NAME . '\\src\\View\\Components', strtolower($this->MODULE_NAME));
         
         // Khai báo routes
-        if (File::exists( __DIR__ . "/../../routes" )) {
+        if (File::exists( $this->module_path . 'routes' )) {
             // Tất cả files có tại thư mục routes
-            $route_dir = File::allFiles( __DIR__ . "/../../routes" );
+            $route_dir = File::allFiles( $this->module_path . 'routes' );
             foreach ( $route_dir as $key => $value ) {
                 $file = $value->getPathName();                
                 $this->loadRoutesFrom( $file );
@@ -55,35 +66,34 @@ class CustomerServiceProvider extends ServiceProvider
         }
         
         // Khai báo views
-        if (File::exists( __DIR__ . "/../../resources/views")) {
+        if (File::exists( $this->module_path . 'resources/views')) {
             // Để gọi view thì ta sử dụng namespace ở phía trước, ví dụ module Demo: view('Demo::index'), @extends('Demo::index'), @include('Demo::index')
-            $this->loadViewsFrom( __DIR__ . "/../../resources/views", $this->MODULE_NAME );
+            $this->loadViewsFrom( $this->module_path . 'resources/views', $this->MODULE_NAME );
         }
-
         $this->publishes([
-            __DIR__ . "/../../resources/views" => resource_path("views"),
-            __DIR__ . "/../../resources/assets" => public_path("assets")
+            $this->module_path . 'resources/views' => resource_path("views"),
+            $this->module_path . 'resources/assets' => public_path("assets")
         ]);
     
         // Khai báo migration
-        if (File::exists( __DIR__ . "/../../database/migrations" )) {
+        if (File::exists( $this->module_path . 'database/migrations' )) {
             // Toàn bộ file migration của modules sẽ tự động được load
-            $this->loadMigrationsFrom(__DIR__ . "../../database/migrations");
+            $this->loadMigrationsFrom( $this->module_path . 'database/migrations');
         }
     
         // Khai báo languages
-        if (File::exists( __DIR__ . "/../../resources/lang" )) {
+        if (File::exists( $this->module_path . 'resources/lang' )) {
             // Đa ngôn ngữ theo file php
             // Dùng đa ngôn ngữ tại file php resources/lang/en/general.php : @lang('Demo::general.hello')
-            $this->loadTranslationsFrom( __DIR__ . "/../../resources/lang", $this->MODULE_NAME );
+            $this->loadTranslationsFrom( $this->module_path . 'resources/lang', $this->MODULE_NAME );
             // Đa ngôn ngữ theo file json
-            $this->loadJSONTranslationsFrom(__DIR__ . "/../../resources/lang");
+            $this->loadJSONTranslationsFrom( $this->module_path . 'resources/lang');
         }
     
         // Khai báo helpers
-        if (File::exists( __DIR__ . "/../../helpers" )) {
+        if (File::exists( $this->module_path . 'helpers' )) {
             // Tất cả files có tại thư mục helpers
-            $helper_dir = File::allFiles( __DIR__ . "/../../helpers" );
+            $helper_dir = File::allFiles( $this->module_path . 'helpers' );
             // khai báo helpers
             foreach ( $helper_dir as $key => $value ) {
                 $file = $value->getPathName();

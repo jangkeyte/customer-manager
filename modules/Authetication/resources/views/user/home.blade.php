@@ -1,4 +1,4 @@
-@extends('JangKeyte::layouts.master')
+@extends('JangKeyte::master')
 
 @section('title', 'Quản lý tài khoản')
 

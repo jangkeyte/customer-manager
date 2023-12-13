@@ -24,10 +24,6 @@ Route::get('/customer-dashboard',  [CustomerController::class, 'index'])->middle
 
 Route::get('/client-dashboard',  [CustomerController::class, 'index'])->middleware(['auth', 'verified'])->name('client-dashboard');
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');

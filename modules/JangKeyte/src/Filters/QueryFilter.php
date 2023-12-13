@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\Authetication\src\Filters;
+namespace Modules\JangKeyte\src\Filters;
 
 use App\Helpers\Common\StringHelper;
 use Illuminate\Database\Eloquent\Builder;

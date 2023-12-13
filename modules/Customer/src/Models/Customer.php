@@ -63,7 +63,7 @@ class Customer extends Model
     public function user()
     {
         // return $this->belongsto('App\Models\Staff', 'foreign_key', 'local_key');
-    	return $this->belongsto('App\Models\User', 'nhan_vien', 'ma_nhan_vien');
+    	return $this->belongsto('Modules\Authetication\src\Models\User', 'nhan_vien', 'ma_nhan_vien');
     }
 
     /**
@@ -72,7 +72,7 @@ class Customer extends Model
     public function status()
     {
         // return $this->belongsto('App\Models\Staff', 'foreign_key', 'local_key');
-    	return $this->belongsto('App\Models\Status', 'tinh_trang', 'status');
+    	return $this->belongsto('Modules\Customer\src\Models\Status', 'tinh_trang', 'status');
     }
 
     /**
@@ -81,7 +81,7 @@ class Customer extends Model
     public function product()
     {
         // return $this->belongsto('App\Models\Staff', 'foreign_key', 'local_key');
-    	return $this->belongsto('App\Models\Product', 'loai_xe', 'uid');
+    	return $this->belongsto('Modules\Customer\src\Models\Product', 'loai_xe', 'uid');
     }
 
     /**
@@ -90,7 +90,7 @@ class Customer extends Model
     public function source()
     {
         // return $this->belongsto('App\Models\Staff', 'foreign_key', 'local_key');
-    	return $this->belongsto('App\Models\Source', 'nguon_khach', 'source');
+    	return $this->belongsto('Modules\Customer\src\Models\Source', 'nguon_khach', 'source');
     }
 
     /**
@@ -99,7 +99,7 @@ class Customer extends Model
     public function channel()
     {
         // return $this->belongsto('App\Models\Staff', 'foreign_key', 'local_key');
-    	return $this->belongsto('App\Models\Channel', 'kenh_lien_he', 'channel');
+    	return $this->belongsto('Modules\Customer\src\Models\Channel', 'kenh_lien_he', 'channel');
     }
 
     /**
@@ -108,7 +108,7 @@ class Customer extends Model
     public function province()
     {
         // return $this->belongsto('App\Models\Staff', 'foreign_key', 'local_key');
-    	return $this->belongsto('App\Models\Province', 'dia_chi', 'id');
+    	return $this->belongsto('Modules\Customer\src\Models\Province', 'dia_chi', 'id');
     }
 
     /**
@@ -117,7 +117,7 @@ class Customer extends Model
     public function store()
     {
         // return $this->belongsto('App\Models\Staff', 'foreign_key', 'local_key');
-    	return $this->belongsto('App\Models\Store', 'cua_hang', 'uid');
+    	return $this->belongsto('Modules\Customer\src\Models\Store', 'cua_hang', 'uid');
     }
 
     /**
@@ -126,69 +126,9 @@ class Customer extends Model
     public function carelogs()
     {
         // return $this->hasMany('App\Models\CareLog', 'foreign_key', 'local_key');
-    	return $this->hasMany('App\Models\CareLog', 'khach_hang', 'ma_khach_hang');
+    	return $this->hasMany('Modules\Customer\src\Models\CareLog', 'khach_hang', 'ma_khach_hang');
     }
    
-    /**
-     * Scope a query to only include active users.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeTinhTrang($query, $tinh_trang=0)
-    {
-        if( $tinh_trang != 0 ) {
-            return $query->where( 'tinh_trang', $tinh_trang );
-        } else {
-            return $query->where( 'tinh_trang', '<>', $tinh_trang );
-        }
-    }
-
-    /**
-     * Scope a query to only include active users.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeKhachShowroom($query, $cua_hang=0)
-    {
-        if( $cua_hang != 0 ) {
-            return $query->where( 'cua_hang', $cua_hang );
-        } else {
-            return $query->where( 'cua_hang', '<>', $cua_hang );
-        }
-    }
-
-    /**
-     * Scope a query to only include active users.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeKhachNhanVien($query, $nhan_vien=0)
-    {
-        if( $nhan_vien != 0 ) {
-            return $query->where( 'nhan_vien', $nhan_vien );
-        } else {
-            return $query->where( 'nhan_vien', '<>', $nhan_vien );
-        }
-    }
-
-    /**
-     * Scope a query to only include active users.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeNguonKhach($query, $nguon_khach=0)
-    {
-        if( $nguon_khach != 0 ) {
-            return $query->where( 'nguon_khach', $nguon_khach );
-        } else {
-            return $query->where( 'nguon_khach', '<>', $nguon_khach );
-        }
-    }
-
     /**
      * Scope a query to only include active users.
      *
@@ -203,130 +143,6 @@ class Customer extends Model
         } else {
             return $query;
         }
-    }
-
-    /**
-     * Scope a query to only include active users.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeSapXepMacDinh($query)
-    {   
-        $thoi_gian = Route::currentRouteName() == 'customer-dashboard' ? 'ngay_mua' : 'ngay_lien_he';
-        return $query->orderBy($thoi_gian, 'desc');
-    }
-
-    /**
-     * Scope a query to only include active users.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeTuNgay($query, $date=0)
-    {   
-        $ngay_them = Route::currentRouteName() == 'timkhachhang' ? 'ngay_mua' : 'ngay_lien_he';
-        $date .= Route::currentRouteName() == 'timkhachhang' ? '' : ' 00:00:00';
-        if( $date != 0 ) {
-            return $query->whereDate($ngay_them, '>=', $date);
-        } else {
-            return $query;
-        }
-    }
-
-    /**
-     * Scope a query to only include active users.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeDenNgay($query, $date=0)
-    {   
-        $ngay_them = Route::currentRouteName() == 'timkhachhang' ? 'ngay_mua' : 'ngay_lien_he';
-        $date .= Route::currentRouteName() == 'timkhachhang' ? '' : ' 00:00:00';
-        if( $date != 0 ) {
-            return $query->whereDate($ngay_them, '<=', $date);
-        } else {
-            return $query;
-        }
-    }
-
-    /**
-     * Scope a query to only include active users.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeSapXepTheo($query, $thuoc_tinh='', $sap_xep_theo='desc')
-    {   
-        //dd($thuoc_tinh, $sap_xep_theo);
-        $thoi_gian = Route::currentRouteName() == 'timkhachhang' ? 'ngay_mua' : 'ngay_lien_he';
-        if( $thuoc_tinh != 'thoi_gian' ) {
-            return $query->orderBy($thuoc_tinh, $sap_xep_theo);
-        } else {
-            return $query->orderBy($thoi_gian, $sap_xep_theo);
-        }
-    }
-
-    /**
-     * Scope a query to only include active users.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeNhanVien($query, $ma_nhan_vien='')
-    {
-        if( !empty($ma_nhan_vien) ) {
-            return $query->where( 'nhan_vien', $ma_nhan_vien );           
-        } elseif ($ma_nhan_vien == 0) {
-            return $query->where( 'nhan_vien', '<>', $ma_nhan_vien );
-        } else {
-            return $query->where( 'nhan_vien', Auth::user()->ma_nhan_vien ); 
-        }
-    }
-
-    /**
-     * Scope a query to only include active users.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeShowroom($query)
-    {
-        return $query->where( 'cua_hang', Auth::user()->showroom );
-    }
-
-    /**
-     * Scope a query to only include active users.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeGetCustomerByRole($query)
-    {
-        if(Auth::user()->haveRights('list_customer_area') || Auth::user()->haveRights('find_customer_area')){
-            return $query;
-        } elseif(Auth::user()->haveRights('list_customer_local') || Auth::user()->haveRights('find_customer_local')) {
-            return $query->where( 'cua_hang', Auth::user()->showroom );
-        } else {
-            return $query->where( 'nhan_vien', Auth::user()->ma_nhan_vien );
-        }
-    }
-
-    /**
-     * Scope a query to only include active users.
-     *
-     * @param  \Illuminate\Database\Eloquent\Builder  $query
-     * @return \Illuminate\Database\Eloquent\Builder
-     */
-    public function scopeTimNhanh($query, $keyword)
-    {   
-        return $query->where('ten_khach_hang', 'like', '%' . $keyword . '%')
-                    ->orWhere('so_dien_thoai', 'like', '%' . $keyword . '%')
-                    ->orWhere('so_khung', 'like', '%' . $keyword . '%')
-                    ->orWhere('so_may', 'like', '%' . $keyword . '%')
-                    ->orWhere('loai_xe', 'like', '%' . $keyword . '%')
-                    ->orWhere('ma_khach_hang', 'like', '%' . $keyword . '%');
     }
 
     /**

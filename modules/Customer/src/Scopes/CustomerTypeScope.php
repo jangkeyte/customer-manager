@@ -19,7 +19,7 @@ class CustomerTypeScope implements Scope
      */
     public function apply(Builder $builder, Model $model)
     {
-        if(Route::current()->getPrefix() == 'customer') {
+        if(Route::current()->getPrefix() == '/customer') {
             $builder->where('loai_khach', 1);
         } else {
             $builder->where('loai_khach', 0);

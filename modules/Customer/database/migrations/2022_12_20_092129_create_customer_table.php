@@ -23,8 +23,7 @@ return new class extends Migration
             $table->tinyInteger('nguon_khach')->nullable();
             $table->tinyInteger('kenh_lien_he')->nullable();
             $table->tinyInteger('loai_khach')->nullable();
-            $table->dateTime('ngay_lien_he')->nullable();
-            $table->date('ngay_mua')->nullable();
+            $table->dateTime('ngay_nhap')->nullable();
             $table->char('loai_xe', 20)->nullable();
             $table->string('mau_xe', 30)->nullable();
             $table->char('so_khung', 30)->nullable();
@@ -33,6 +32,7 @@ return new class extends Migration
             $table->char('cua_hang', 6);
             $table->tinyInteger('tinh_trang')->nullable();
             $table->string('ghi_chu', 400)->nullable();
+            $table->softDeletes();
             $table->timestamps();            
         });
     }

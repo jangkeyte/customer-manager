@@ -10,8 +10,6 @@
     </div>
 @else
 
-<!-- jangkeyte@gmail.com | myvMqcH4ULQ9N6J -->
-
 <x-app-layout>
 
 <div class="container pt-2">

@@ -28,7 +28,7 @@ class CustomerRepository extends BaseRepository implements CustomerRepositoryInt
     // Lấy danh sách toàn bộ Khách hàng
     public function getCustomers()
     {
-        return Customer::SapXepMacDinh()->paginate(20);
+        return $this->model->paginate(30);
     }
 
     // Lấy thông tin Khách hàng theo Mã Khách hàng

@@ -2,7 +2,7 @@
 
 namespace Modules\Authetication\src\Filters;
 
-use Modules\JangKeyte\src\Filters;
+use Modules\JangKeyte\src\Filters\QueryFilter;
 
 class UserFilter extends QueryFilter
 {

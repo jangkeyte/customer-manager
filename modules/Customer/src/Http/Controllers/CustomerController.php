@@ -54,15 +54,16 @@ class CustomerController extends Controller
     public function create()
     {        
         $customers = $this->customerRepository->getCustomers();
-        $statistics = $this->statisticsRepository->getStatisticsList($loai_khach);
+        $statistics = $this->statisticsRepository->getStatisticsList();
 
-        return view('customer.customer-dashboard', [
+        return view('Customer::dashboard', [
             'customers' => $customers,
             'thoi_gian' => $statistics['date'],
             'tinh_trang' => $statistics['status'],
             'nhan_vien' => $statistics['user'],
             'cua_hang' => $statistics['store'],
             'nguon_khach' => $statistics['source'],
+            'kenh_lien_he' => $statistics['channel'],
         ]);
     }
 
@@ -75,7 +76,7 @@ class CustomerController extends Controller
     public function show($ma_khach_hang)
     {
         $khach_hang = $this->customerRepository->getCustomerByID($ma_khach_hang);
-        return view('customer.partials.customer-infomation', [
+        return view('Customer::customer.partials.customer-infomation', [
             'khach_hang' => $khach_hang,
         ]);
     }

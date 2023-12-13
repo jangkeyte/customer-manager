@@ -54,7 +54,7 @@ class StatisticsRepository extends BaseRepository implements StatisticsRepositor
     }
 
     // Lấy thông tin trạng thái theo mã trạng thái
-    public function getStatisticsList($loai_khach=0)
+    public function getStatisticsList()
     {
         $statistics = array();
         $statistics['status'] = $this->getStatusListWithCount();
@@ -80,7 +80,6 @@ class StatisticsRepository extends BaseRepository implements StatisticsRepositor
     {
         $countList = Customer::join('ktgiang_status', 'ktgiang_customer.tinh_trang', '=', 'ktgiang_status.status')
             ->select(DB::raw("COUNT(*) AS so_khach"), 'ktgiang_customer.tinh_trang', 'ktgiang_status.name')
-            ->GetCustomerByRole()
             ->groupBy('ktgiang_customer.tinh_trang', 'ktgiang_status.name')
             ->get();
 
@@ -92,7 +91,6 @@ class StatisticsRepository extends BaseRepository implements StatisticsRepositor
     {
         $countList = Customer::join('ktgiang_store', 'ktgiang_customer.cua_hang', '=', 'ktgiang_store.uid')
             ->select(DB::raw("COUNT(*) AS so_khach, ktgiang_customer.cua_hang, ktgiang_store.name"))
-            ->GetCustomerByRole()
             ->groupBy('ktgiang_customer.cua_hang', 'ktgiang_store.name')
             ->get();
 
@@ -102,10 +100,9 @@ class StatisticsRepository extends BaseRepository implements StatisticsRepositor
     // Lấy danh sách nhân viên với số lượng Khách hàng
     public function getUserListWithCount()
     {
-        $countList = Customer::join('ktgiang_user', 'ktgiang_customer.nhan_vien', '=', 'ktgiang_user.ma_nhan_vien')
-            ->select(DB::raw("COUNT(*) AS so_khach, ktgiang_customer.nhan_vien, ktgiang_user.ten_nhan_vien"))
-            ->GetCustomerByRole()
-            ->groupBy('ktgiang_customer.nhan_vien', 'ktgiang_user.ten_nhan_vien')
+        $countList = Customer::join('ktgiang_staff', 'ktgiang_customer.nhan_vien', '=', 'ktgiang_staff.ma_nhan_vien')
+            ->select(DB::raw("COUNT(*) AS so_khach, ktgiang_customer.nhan_vien, ktgiang_staff.ten_nhan_vien"))
+            ->groupBy('ktgiang_customer.nhan_vien', 'ktgiang_staff.ten_nhan_vien')
             ->get();
 
         return $this->getResultOfObject($countList, 'nhan_vien', 'ten_nhan_vien');
@@ -116,7 +113,6 @@ class StatisticsRepository extends BaseRepository implements StatisticsRepositor
     {
         $countList = Customer::join('ktgiang_source', 'ktgiang_customer.nguon_khach', '=', 'ktgiang_source.source')
             ->select(DB::raw("COUNT(*) AS so_khach, ktgiang_customer.nguon_khach, ktgiang_source.name"))
-            ->GetCustomerByRole()
             ->groupBy('ktgiang_customer.nguon_khach', 'ktgiang_source.name')
             ->get();
 
@@ -126,10 +122,7 @@ class StatisticsRepository extends BaseRepository implements StatisticsRepositor
     // Lấy danh sách tháng năm với số lượng Khách hàng
     public function getDateListWithCount()
     {
-        $ngay_them = (Route::currentRouteName() == 'timkhachhang' || Route::currentRouteName() == 'customer-dashboard') ? 'ngay_mua' : 'ngay_lien_he';
-
-        $countList = Customer::select(DB::raw("COUNT(*) AS so_khach, DATE_FORMAT(" . $ngay_them . ",'%Y-%m') AS thoi_gian, DATE_FORMAT(" . $ngay_them . ",'%m/%Y') AS name"))
-            ->GetCustomerByRole()
+        $countList = Customer::select(DB::raw("COUNT(*) AS so_khach, DATE_FORMAT(ngay_nhap,'%Y-%m') AS thoi_gian, DATE_FORMAT(ngay_nhap,'%m/%Y') AS name"))
             ->groupBy('thoi_gian', 'name')
             ->get();
 

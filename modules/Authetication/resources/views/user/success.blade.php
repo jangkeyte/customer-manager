@@ -1,4 +1,4 @@
-@extends('Authetication::layouts.master')
+@extends('Authetication::master')
 
 @section('title', 'Đăng nhập thành công')
 

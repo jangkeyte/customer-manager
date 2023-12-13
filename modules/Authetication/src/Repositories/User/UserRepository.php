@@ -42,7 +42,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
      */
     public function all()
     {
-        return $this->model->paginate(20);
+        return $this->model->paginate(99);
     }
   
     public function createUser(CreateUserRequest $request)
@@ -112,7 +112,7 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
      */
     public function search(Request $request)
     {
-        return $this->model->filter(new UserFilter($request))->paginate(10);
+        return $this->model->filter(new UserFilter($request))->paginate(99);
     }
 
     /**

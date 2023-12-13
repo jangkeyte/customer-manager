@@ -13,11 +13,10 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('ktgiang_status', function (Blueprint $table) {
+        Schema::create('ktgiang_source', function (Blueprint $table) {
             $table->id();
             $table->string('name', 80)->unique();
-            $table->tinyInteger('status');
-            $table->string('code')->default('light text-dark');
+            $table->tinyInteger('source');
             $table->string('description')->nullable();
             $table->timestamps();
         });
@@ -30,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('ktgiang_status');
+        Schema::dropIfExists('ktgiang_source');
     }
 };

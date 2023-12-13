@@ -27,7 +27,7 @@
 	<div id="wrapper">      
         @include('JangKeyte::partials.header')
      
-		<main id="main">  
+		<main id="main" class="mt-5"> 
             @yield('content')
 		</main><!-- #main -->
 

@@ -1,26 +1,49 @@
-<header class="p-3 text-bg-dark">
-    <div class="container">
-      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-        <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
-          <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"></use></svg>
-        </a>
-
-        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-          <li><a href="/" class="nav-link px-2 text-secondary">Trang chủ</a></li>
-          <li><a href="{!! route('customer') !!}" class="nav-link px-2 text-white">Khách hàng</a></li>
-          <li><a href="{!! route('customer') !!}">Khách hàng tiềm năng</a></li>
-          <li><a href="#" class="nav-link px-2 text-white">Nhập liệu</a></li>
-          <li><a href="{!! route('user') !!}" class="nav-link px-2 text-white">Người dùng</a></li>
-        </ul>
-
-        <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
-          <input type="search" class="form-control form-control-dark text-bg-dark" placeholder="Tìm kiếm..." aria-label="Tìm kiếm">
-        </form>
-
-        <div class="text-end">
-          <button type="button" class="btn btn-outline-light me-2">Đăng nhập</button>
-          <button type="button" class="btn btn-warning">Đăng ký</button>
+<header class="text-bg-dark">
+  <div class="container">
+    <nav class="navbar navbar-expand-sm bg-body-tertiary fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">TOPCOM</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+          <div class="offcanvas-header">
+            <h5 class="offcanvas-title" id="offcanvasNavbarLabel">TOPCOM</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+          </div>
+          <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Trang chủ</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{!! route('customer') !!}">Khách hàng</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{!! route('client') !!}">Khách hàng tiềm năng</a>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Người dùng
+                </a>
+                <ul class="dropdown-menu">
+                  <li><a class="dropdown-item" href="{!! route('user') !!}">Danh sách Người dùng</a></li>
+                  <li><a class="dropdown-item" href="#">Thông tin</a></li>
+                  <li><a class="dropdown-item" href="#">Đổi mật khẩu</a></li>
+                  <li>
+                    <hr class="dropdown-divider">
+                  </li>
+                  <li><a class="dropdown-item" href="#">Đăng xuất</a></li>
+                </ul>
+              </li>
+            </ul>
+            <form class="d-flex" role="search">
+              <input class="form-control me-2" type="search" placeholder="Nhập từ khóa" aria-label="Search">
+              <button class="btn btn-outline-success" type="submit">Tìm</button>
+            </form>
+          </div>
         </div>
       </div>
-    </div>
+    </nav>
+  </div>
 </header>
