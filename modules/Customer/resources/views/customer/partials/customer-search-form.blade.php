@@ -1,17 +1,4 @@
-<!--
-<h3>Tìm nhanh Khách hàng</h3>
-<div class="flex-center position-ref full-height">
-    <div class="content">
-        <form class="typeahead" role="search">
-            <input type="search" name="q" class="form-control search-input" placeholder="Nhập từ khóa..." autocomplete="off">
-        </form>
-    </div>
-</div>
---> 
-<hr>
-
-<div class="container-fluid px-0 mx-0 mt-2">
-    
+<div class="container-fluid px-0 mx-0 mt-2">    
     @if(Route::current()->getPrefix() == '/customer') 
     <form method="POST" action="{{ route('customer.search') }}">
     @else
@@ -22,51 +9,58 @@
 
             <!-- Từ khóa -->
             <div class="col-md-3 form-floating mb-3">
-                @include('JangKeyte::commons.text', array('name' => 'keyword', 'label' => 'Từ khóa'))
+                <x-jangkeyte::forms.text name="keyword" label="Từ khóa" />
             </div>
             
-            <!-- Cửa hàng -->
-            <div class="col-md-1 form-floating mb-3">
-                @include('JangKeyte::commons.select', array('name' => 'cua_hang', 'label' => 'Cửa hàng', 'data' => $cua_hang))
-            </div>
+            <!-- Nếu không phải là người dùng hoặc khách thì có thể tìm kiếm theo cửa hàng và nhân viên -->
+            @if(!auth()->user()->hasRole('user','guest'))
 
-            <!-- Nhân viên -->
-            <div class="col-md-1 form-floating mb-3">
-                @include('JangKeyte::commons.select', array('name' => 'nhan_vien', 'label' => 'Nhân viên', 'data' => $nhan_vien))
-            </div>
-
+                <!-- Nếu không phải là trưởng nhóm thì có thể tìm kiếm theo cửa hàng -->
+                @if(!auth()->user()->hasRole('leader'))
+                    <!-- Cửa hàng -->
+                    <div class="col-md-1 form-floating mb-3">
+                        <x-jangkeyte::forms.select name="cua_hang" label="Cửa hàng" :options="$cua_hang" />
+                    </div>
+                @endif
+                
+                <!-- Nhân viên -->
+                <div class="col-md-1 form-floating mb-3">
+                    <x-jangkeyte::forms.select name="nhan_vien" label="Nhân viên" :options="$nhan_vien" />
+                </div>
+            @endif
+            
             <!-- Nguồn khách -->
             <div class="col-md-1 form-floating mb-3">
-                @include('JangKeyte::commons.select', array('name' => 'nguon', 'label' => 'Nguồn khách', 'data' => $nguon_khach))
+                <x-jangkeyte::forms.select name="nguon" label="Nguồn khách" :options="$nguon_khach" />
             </div>
 
             <!-- Tình trạng -->
             <div class="col-md-1 form-floating mb-3">
-                @include('JangKeyte::commons.select', array('name' => 'kenh_lien_he', 'label' => 'Kênh liên hệ', 'data' => $kenh_lien_he))
+                <x-jangkeyte::forms.select name="kenh_lien_he" label="Kênh liên hệ" :options="$kenh_lien_he" />
             </div>
 
             <!-- Trong tháng -->
             <div class="col-md-1 form-floating mb-3">
-                @include('JangKeyte::commons.select', array('name' => 'thoi_gian', 'label' => 'Trong tháng', 'data' => $thoi_gian))
+                <x-jangkeyte::forms.select name="thoi_gian" label="Trong tháng" :options="$thoi_gian" />
             </div>
 
             <!-- Thời gian -->
             <div class="col-md-1 form-floating mb-3">
-                @include('JangKeyte::commons.date', array('name' => 'tu_ngay', 'label' => 'Từ ngày'))
+                <x-jangkeyte::forms.date name="tu_ngay" label="Từ ngày" />   
             </div>
 
             <div class="col-md-1 form-floating mb-3">
-                @include('JangKeyte::commons.date', array('name' => 'den_ngay', 'label' => 'Đến ngày'))
+                <x-jangkeyte::forms.date name="den_ngay" label="Đến ngày" />   
             </div>
             
             <!-- Order by -->
             <div class="col-md-1 form-floating mb-3">
-            @include('JangKeyte::commons.select', array('name' => 'sap_xep', 'label' => 'Sắp xếp theo'))
+                <x-jangkeyte::forms.select name="sap_xep" label="Sắp xếp theo" :options="$sap_xep" />
             </div>
 
             <!-- Order by -->
             <div class="col-md-1 form-floating mb-3">
-            @include('JangKeyte::commons.select', array('name' => 'sap_xep_theo', 'label' => 'Chiều hướng', 'data' => array('asc' => 'Tăng dần', 'desc' => 'Giảm dần')))
+                <x-jangkeyte::forms.select name="sap_xep_theo" label="Chiều hướng" :options="$sap_xep_theo" />
             </div>
             
             <!-- Nguồn khách -->

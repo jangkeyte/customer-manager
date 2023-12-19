@@ -38,7 +38,11 @@ class LoginController extends Controller
      */
     public function create(Request $request): View
     {
-        return view('Authetication::user.login');
+        if(!auth()->check()) {
+            return view('Authetication::user.login');
+        } else {
+            return redirect()->route('user.detail', $user->id);
+        }        
     }
 
     /**
@@ -51,11 +55,7 @@ class LoginController extends Controller
         if($user){
             if(Hash::check($request->password, $user->password)){
                 Auth::login($user, $remember = $request->remember);
-                if(Auth::user()->can('brow-customer')) {
-                    return redirect()->route('dashboard');
-                } else {
-                    return redirect()->route('dashboard');
-                }
+                return redirect()->route('user.detail', $user->id);
             }
         }
         return redirect()->route('user.login')->with('message', 'Tên đăng nhập hoặc mật khẩu không đúng!!!');

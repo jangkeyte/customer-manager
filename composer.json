@@ -28,7 +28,10 @@
             "Modules\\": "modules/",
             "Database\\Factories\\": "database/factories/",
             "Database\\Seeders\\": "database/seeders/"
-        }
+        },
+        "files": [
+            "modules/JangKeyte/src/Helpers/MainHelper.php"
+        ]
     },
     "autoload-dev": {
         "psr-4": {

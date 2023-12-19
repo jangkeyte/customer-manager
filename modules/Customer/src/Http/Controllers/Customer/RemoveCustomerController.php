@@ -1,16 +1,13 @@
 <?php
 
-namespace App\Http\Controllers\Customer;
+namespace Modules\Customer\src\Http\Controllers\Customer;
 
-use App\Repositories\CustomerRepository;
+use Modules\Customer\src\Models\User;
+use Modules\Customer\src\Models\Customer;
+use Modules\Customer\src\Repositories\Customer\CustomerRepository;
 use App\Http\Controllers\Controller;
-use App\Models\Customer;
-use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Auth;
 
 class RemoveCustomerController extends Controller
 {
@@ -29,7 +26,7 @@ class RemoveCustomerController extends Controller
     public function create($ma_khach_hang)
     {
         $customer = Customer::where('ma_khach_hang', $ma_khach_hang)->first(); 
-        return view('customer.partials.customer-delete', [
+        return view('Customer::customer.customer-delete', [
             'customer' => $customer,
         ]);
     }
@@ -45,6 +42,6 @@ class RemoveCustomerController extends Controller
     public function store(Request $request)
     {
         $result = $this->customerRepository->deleteCustomerByID($request->ma_khach_hang);     
-        return redirect(RouteServiceProvider::CUSTOMER);
+        return redirect()->back();
     }
 }

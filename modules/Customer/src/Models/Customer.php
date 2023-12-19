@@ -30,18 +30,24 @@ class Customer extends Model
         'gioi_tinh',
         'dia_chi',
         'so_dien_thoai', 
+        'cach_lay_so',
         'nguon_khach',
         'kenh_lien_he',
         'loai_khach',
         'ngay_nhap', 
+        'thoi_gian_nhan',
+        'thoi_gian_chuyen',
+        'nguoi_chuyen',
         'loai_xe',
         'mau_xe',   
         'so_khung',    
         'so_may',   
         'nhan_vien',   
         'cua_hang', 
+        'nhu_cau',
+        'thong_tin_lien_he',
         'tinh_trang',
-        'ghi_chu', 
+        'ghi_chu',
     ];
 
     public $timestamps = true;
@@ -60,10 +66,10 @@ class Customer extends Model
     /**
      * Một Khách hàng thuộc về một nhân viên chăm sóc.
      */
-    public function user()
+    public function staff()
     {
         // return $this->belongsto('App\Models\Staff', 'foreign_key', 'local_key');
-    	return $this->belongsto('Modules\Authetication\src\Models\User', 'nhan_vien', 'ma_nhan_vien');
+    	return $this->belongsto('Modules\Customer\src\Models\Staff', 'nhan_vien', 'ma_nhan_vien');
     }
 
     /**

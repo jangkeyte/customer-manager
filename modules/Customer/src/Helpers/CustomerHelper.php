@@ -34,3 +34,30 @@ if (! function_exists('getCustomerByStatus')) {
         
     }
 }
+
+/**
+ * checkRoute.
+ *
+ * @return void
+ */
+if (! function_exists('checkRoute')) {
+    function checkRoute($name)
+    {
+        if(Route::current()->getPrefix() == $name){
+            return true;
+        } else {
+            return false;
+        }
+    }
+}
+
+if (!function_exists('formatDate')) {
+    function formatDate($date, string $format = 'Y/m/d')
+    {
+        if ($date instanceof \Carbon\Carbon) {
+            return $date->format($format);
+        }
+
+        return $date;
+    }
+}

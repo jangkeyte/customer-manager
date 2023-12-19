@@ -22,9 +22,10 @@ class CustomerByRoleScope implements Scope
         if(Auth::user()->hasRole('manager|admin|administrator')){
             $builder;
         } elseif(Auth::user()->hasRole('leader')) {
-            $builder->where( 'cua_hang', Auth::user()->staff->cua_hang );
+            $builder->where( 'ktgiang_customer.cua_hang', auth()->user()->staff->cua_hang );
         } elseif(Auth::user()->hasRole('user')) {
-            $builder->where( 'nhan_vien', Auth::user()->staff->ma_nhan_vien );
+            //dd(auth()->user()->staff);
+            $builder->where( 'nhan_vien', auth()->user()->staff->ma_nhan_vien );
         } else {
             return;
         }

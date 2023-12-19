@@ -3,11 +3,15 @@
 use Modules\Customer\src\Http\Controllers\CareLog\CreateCareLogController;
 use Illuminate\Support\Facades\Route;
 
-Route::middleware('auth')->group(function () {
+Route::middleware('web')->group(function () {
 
-    Route::get('chamsockhachhang/{khach_hang}', [CreateCareLogController::class, 'create'])
-                ->name('chamsockhachhang');
+    Route::group(['prefix' => 'carelog', 'middleware' => 'auth'], function () {
+        
+        Route::get('create/{ma_khach_hang}', [CreateCareLogController::class, 'create'])
+            ->name('carelog.create');
 
-    Route::post('carelog_add', [CreateCareLogController::class, 'store'])->name('carelog_add');
+        Route::post('carelog', [CreateCareLogController::class, 'store'])
+            ->name('create.carelog');
+    });
 
 });

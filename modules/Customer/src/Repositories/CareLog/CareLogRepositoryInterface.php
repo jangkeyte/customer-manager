@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Repositories\CareLog;
+namespace Modules\Customer\src\Repositories\CareLog;
 
-use App\Models\CareLog;
-use App\Repositories\RepositoryInterface;
+use Modules\Customer\src\Models\CareLog;
+use Modules\Customer\src\Repositories\RepositoryInterface;
 use Throwable;
 
 /**
  * Interface CareLogRepositoryInterface
  *
- * @package App\Repositories\CareLog
+ * @package Modules\Customer\src\Repositories\CareLog
  */
 interface CareLogRepositoryInterface extends RepositoryInterface
 {

@@ -2,4 +2,24 @@
 :root{--primary:#007bff;--header-height: 3rem;--nav-width: 68px;--first-color: #4723D9;--first-color-light: #AFA5D9;--white-color: #F7F6FB;--body-font: 'Nunito', sans-serif;--normal-font-size: 1rem;--z-fixed: 100}
 *,::before,::after{box-sizing: border-box}
 body{position: relative;margin: var(--header-height) 0 0 0;padding: 0 1rem;font-family: var(--body-font);font-size: var(--normal-font-size);transition: .5s}
-a{text-decoration: none}
+a{text-decoration: none!important;}
+table th {word-wrap: none;}
+:root {
+    --bs-body-font-size: 0.85rem!important;
+}
+.btn-group-sm>.btn, .btn-sm {
+    --bs-btn-font-size: 0.85rem!important;
+}
+.dropdown-menu {
+    --bs-dropdown-font-size: 0.85rem!important;
+}
+.form-control {
+    font-size: 0.85rem!important;
+}
+.form-select {
+    font-size: 0.85rem!important;
+}
+table th {
+    height: 40px;
+    padding: 5px!important;
+}

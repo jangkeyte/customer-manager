@@ -24,16 +24,15 @@ Route::group(['middleware' => 'web'], function () {
         else
             return redirect(route('dashboard'));
     });
+    Route::get('login', [LoginController::class, 'create'])->name('login');
+    Route::post('login', [LoginController::class, 'login'])->name('user.login');
 
-    Route::group(['prefix' => 'user'], function () {
-        Route::get('login', [LoginController::class, 'create']);
-        Route::post('login', [LoginController::class, 'login'])->name('user.login');
+    Route::group(['prefix' => 'user', 'middleware' => 'auth'], function () {
         Route::get('changepwd', [UserController::class, 'changepwd'])->name('user.changepwd');
-        Route::get('logout', [LoginController::class, 'destroy'])->name('user.logout');
 
         Route::get('detail/{id}', [UserController::class, 'show'])
             ->name('user.detail')
-            ->middleware('permission:browse-user');
+            ->middleware('permission:read-user');
         
         Route::get('/', [UserController::class, 'create'])
             ->name('user')
@@ -44,16 +43,18 @@ Route::group(['middleware' => 'web'], function () {
         
         // Tạo mới người dùng
         Route::get('create', [CreateUserController::class, 'create'])
-            ->middleware('permission:add-user')->name('create.user');
+            ->middleware('permission:add-user')
+            ->name('user.create');
         Route::post('create', [CreateUserController::class, 'store'])
-            ->name('user.create')
+            ->name('create.user')
             ->middleware('permission:add-user');
 
         // Tạo mới người dùng
         Route::get('update/{id}', [UpdateUserController::class, 'create'])
-            ->middleware('permission:edit-user')->name('update.user');
+            ->middleware('permission:edit-user')
+            ->name('user.update');
         Route::post('update', [UpdateUserController::class, 'store'])
-            ->name('user.update')
+            ->name('update.user')
             ->middleware('permission:edit-user');
 
         // Xuất dữ người dùng
@@ -65,20 +66,24 @@ Route::group(['middleware' => 'web'], function () {
             ->middleware('permission:export-user');
 
         // Nhập dữ người dùng
-        Route::get('import', [ImportUserController::class, 'create']);
-        Route::post('import', [ImportUserController::class, 'store'])
+        Route::get('import', [ImportUserController::class, 'create'])
             ->name('user.import')
+            ->middleware('permission:import-user');;
+        Route::post('import', [ImportUserController::class, 'store'])
+            ->name('import.user')
             ->middleware('permission:import-user');
 
         // Tìm thông tin người dùng
         Route::get('search', [SearchUserController::class, 'create'])
-            ->name('user.search')
-            ->middleware('permission:browse-user');
+            ->middleware('permission:browse-user')
+            ->name('user.search');
         Route::post('search', [SearchUserController::class, 'store'])
-            ->middleware('permission:browse-user');
+            ->middleware('permission:browse-user')
+            ->name('search.user');
 
         // Đăng xuất
-        Route::post('logout', [LoginController::class, 'destroy'])->name('logout');
+        Route::get('logout', [LoginController::class, 'destroy'])->name('user.logout');
+        Route::post('logout', [LoginController::class, 'destroy'])->name('logout.user');
     });
     /*
 

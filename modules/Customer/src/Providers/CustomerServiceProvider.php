@@ -42,7 +42,7 @@ class CustomerServiceProvider extends ServiceProvider
         }
 
         // Bind repository cho module Customer
-        $authetications = array('Customer', 'Statistics');
+        $authetications = array('Customer', 'Statistics', 'CareLog');
         foreach ($authetications as $authetication) {
             $this->app->bind(
                 'Modules\Customer\src\Repositories\\' . $authetication . '\\' . $authetication . 'RepositoryInterface',

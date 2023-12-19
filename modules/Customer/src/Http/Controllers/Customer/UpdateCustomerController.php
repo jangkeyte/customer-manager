@@ -2,17 +2,14 @@
 
 namespace Modules\Customer\src\Http\Controllers\Customer;
 
-use Modules\Customer\src\Models\Customer;
-use Modules\Customer\src\Models\User;
-use Modules\Customer\src\Models\Province;
+//use Modules\Customer\src\Models\Customer;
+use Modules\Customer\src\Http\Requests\Customer\UpdateCustomerRequest;
 use Modules\Customer\src\Repositories\Customer\CustomerRepositoryInterface;
 use Modules\Customer\src\Repositories\Statistics\StatisticsRepositoryInterface;
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
-use Illuminate\Validation\Rule;
-use Illuminate\Support\Facades\Auth;
+//use Illuminate\Support\Str;
+//use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Route;
 
 class UpdateCustomerController extends Controller
 {
@@ -35,13 +32,17 @@ class UpdateCustomerController extends Controller
         $khach_hang = $this->customerRepository->getCustomerByID($ma_khach_hang);
         $statistics = $this->statisticsRepository->getPureStatisticsList();
 
-        return view('customer.partials.customer-update', [
+        return view('Customer::customer.customer-update', [
             'customer' => $khach_hang,
-            'tinh_thanh' => $statistics['province'],
             'loai_xe' => $statistics['product'], 
             'nguon_khach' => $statistics['source'],
+            'kenh_lien_he' => $statistics['channel'],
             'cua_hang' => $statistics['store'],
-            'danh_sach_nhan_vien' => $statistics['user']
+            'tinh_thanh' => $statistics['province'],
+            'danh_sach_nhan_vien' => $statistics['staff'],
+            'cach_lay_so' => collect(array('1' => 'Tự cho', '2' => 'Quét số', '0' => 'Không quét được')),
+            'loai_khach' => collect(array('0' => 'Trước mua', '1' => 'Sau mua')),
+            'tinh_trang' => $statistics['status'],
         ]);
     }
     
@@ -53,10 +54,10 @@ class UpdateCustomerController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
-    public function store(Request $request)
+    public function store(UpdateCustomerRequest $request)
     {
-        $customer = $this->customerRepository->updateCustomerByID($request->ma_khach_hang, $request);        
-        return redirect(RouteServiceProvider::CUSTOMER);
+        $customer = $this->customerRepository->updateCustomerByID($request->ma_khach_hang, $request); 
+        return redirect()->back();
     }
     
 }

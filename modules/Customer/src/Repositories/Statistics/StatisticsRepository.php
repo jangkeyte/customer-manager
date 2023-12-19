@@ -11,6 +11,7 @@ use Modules\Customer\src\Models\Source;
 use Modules\Customer\src\Models\Channel;
 use Modules\Customer\src\Models\Store;
 use Modules\Customer\src\Models\Province;
+use Modules\Customer\src\Models\Status;
 
 use Modules\Customer\src\Repositories\BaseRepository;
 use Illuminate\Database\DatabaseManager;
@@ -50,6 +51,7 @@ class StatisticsRepository extends BaseRepository implements StatisticsRepositor
         $statistics['channel'] = Channel::pluck('name', 'channel');
         $statistics['store'] = Store::pluck('name', 'uid');
         $statistics['province'] = Province::pluck('name', 'id');
+        $statistics['status'] = Status::pluck('name', 'id');
         return $statistics;
     }
 

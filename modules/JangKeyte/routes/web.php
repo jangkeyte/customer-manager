@@ -16,11 +16,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/hello', function () {
     return "<h1>Hello World 1</h1>";
 })->name('hello');
-
+/*
 Route::get('/login', function () {
     return redirect('/user/login');
 })->name('login');
-
+*/
 Route::get('/dashboard', function () {
     return "<h1>Hello World</h1>";
 })->name('dashboard');

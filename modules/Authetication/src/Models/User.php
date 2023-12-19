@@ -37,7 +37,7 @@ class User extends Authenticatable
      */
     public function staff()
     {
-    	return $this->hasOne('Modules\Customer\src\Models\Staff', 'user_id', 'id');
+    	return $this->hasOne('Modules\Customer\src\Models\Staff', 'ma_nhan_vien', 'uid');
     }
 
     /**

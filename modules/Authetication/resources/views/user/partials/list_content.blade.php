@@ -38,7 +38,3 @@
 @else
     @include('JangKeyte::errors.404')
 @endif
-
-@section('modals')
-    @include('Authetication::user.elements.modal')
-@stop

@@ -1,8 +1,8 @@
-@extends('JangKeyte::master')
+@extends('Authetication::master')
 
 @section('title', 'Trang đăng nhập')
 
-@section('content')
+@section('entry_content')
 
 <style>
     body{

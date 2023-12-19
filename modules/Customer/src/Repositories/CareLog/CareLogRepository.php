@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Repositories\CareLog;
+namespace Modules\Customer\src\Repositories\CareLog;
 
-use App\Models\CareLog;
-use App\Repositories\BaseRepository;
+use Modules\Customer\src\Models\CareLog;
+use Modules\Customer\src\Repositories\BaseRepository;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;

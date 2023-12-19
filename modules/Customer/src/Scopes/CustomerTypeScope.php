@@ -21,8 +21,10 @@ class CustomerTypeScope implements Scope
     {
         if(Route::current()->getPrefix() == '/customer') {
             $builder->where('loai_khach', 1);
-        } else {
+        } else if(Route::current()->getPrefix() == '/client') {
             $builder->where('loai_khach', 0);
+        } else {
+            $builder;
         }
     }
 }

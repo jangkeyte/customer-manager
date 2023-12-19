@@ -50,7 +50,6 @@ class BaseRepository implements RepositoryInterface
             $result->update($attributes);
             return $result;
         }
-
         return false;
     }
 
@@ -59,10 +58,8 @@ class BaseRepository implements RepositoryInterface
         $result = $this->find($id);
         if ($result) {
             $result->delete();
-
             return true;
         }
-
         return false;
     }
     

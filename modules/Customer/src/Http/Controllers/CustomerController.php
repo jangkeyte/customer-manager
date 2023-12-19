@@ -55,15 +55,16 @@ class CustomerController extends Controller
     {        
         $customers = $this->customerRepository->getCustomers();
         $statistics = $this->statisticsRepository->getStatisticsList();
-
         return view('Customer::dashboard', [
             'customers' => $customers,
-            'thoi_gian' => $statistics['date'],
-            'tinh_trang' => $statistics['status'],
-            'nhan_vien' => $statistics['user'],
-            'cua_hang' => $statistics['store'],
-            'nguon_khach' => $statistics['source'],
-            'kenh_lien_he' => $statistics['channel'],
+            'thoi_gian' => collect($statistics['date']),
+            'tinh_trang' => collect($statistics['status']),
+            'nhan_vien' => collect($statistics['user']),
+            'cua_hang' => collect($statistics['store']),
+            'nguon_khach' => collect($statistics['source']),
+            'kenh_lien_he' => collect($statistics['channel']),
+            'sap_xep' => collect(array('cua_hang' => 'Cửa hàng', 'nhan_vien' => 'Nhân viên', 'nguon_khach' => 'Nguồn khách', 'tinh_trang' => 'Tình trạng', 'thoi_gian' => 'Thời gian')),
+            'sap_xep_theo' => collect(array('asc' => 'Tăng dần', 'desc' => 'Giảm dần'))
         ]);
     }
 
@@ -73,10 +74,10 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($ma_khach_hang)
+    public function show($id)
     {
-        $khach_hang = $this->customerRepository->getCustomerByID($ma_khach_hang);
-        return view('Customer::customer.partials.customer-infomation', [
+        $khach_hang = $this->customerRepository->getCustomerByID($id);
+        return view('Customer::customer.partials.customer-detail', [
             'khach_hang' => $khach_hang,
         ]);
     }

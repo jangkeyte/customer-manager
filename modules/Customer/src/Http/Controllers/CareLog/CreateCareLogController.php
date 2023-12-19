@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\CareLog;
+namespace Modules\Customer\src\Http\Controllers\CareLog;
 
-use App\Http\Controllers\Controller;
-use App\Models\Customer;
-use App\Models\CareLog;
-use App\Models\Client;
+use Modules\Customer\src\Models\Customer;
+use Modules\Customer\src\Models\Status;
+use Modules\Customer\src\Models\CareLog;
+use Modules\Customer\src\Repositories\Customer\CustomerRepositoryInterface;
+use Modules\Customer\src\Repositories\CareLog\CareLogRepositoryInterface;
+
 use App\Providers\RouteServiceProvider;
-use App\Repositories\Customer\CustomerRepositoryInterface;
-use App\Repositories\CareLog\CareLogRepositoryInterface;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 
@@ -31,15 +31,15 @@ class CreateCareLogController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function create($khach_hang)
+    public function create($ma_khach_hang)
     {
         // Lấy thông tin Khách hàng theo mã Khách hàng truyền vào và gọi view hiển thị dữ liệu
-        $customer = $this->customerRepository->getCustomerByID($khach_hang);
-        $isCustomer = 1;
+        $customer = $this->customerRepository->getCustomerByID($ma_khach_hang);
+        $status = Status::pluck('name', 'id');
         if(empty($customer)) {
-            return view('content-none', ['khach_hang' => $khach_hang]);
+            return view('Customer::content-none', ['customer' => $customer]);
         } else {
-            return view('carelog.partials.carelog-create', ['khach_hang' => $customer]);
+            return view('Customer::carelog.carelog-create', ['customer' => $customer, 'status' => $status]);
         }
     }
 
@@ -69,9 +69,6 @@ class CreateCareLogController extends Controller
         $customer = $this->customerRepository->updateCustomerStatusByID($request->khach_hang, $request->tinh_trang);
 
         // Quay trở lại trang Khách hàng
-        if($request->loai_khach_hang)
-            return redirect(RouteServiceProvider::CUSTOMER);
-        else
-            return redirect(RouteServiceProvider::CLIENT);
+        return redirect()->back();
     }
 }

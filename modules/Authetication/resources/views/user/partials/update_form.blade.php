@@ -1,38 +1,40 @@
 @isset($user)
-{!! Form::open(array('url' => route('user.update'), 'method' => 'post', 'files' => true)) !!}
+{{ html()->form('POST')->route('update.' . substr(Route::current()->getPrefix(), 1) )->acceptsFiles()->open() }}
 <div class="row mt-3">
     <div class="col-md-8">
-        @include('Authetication::user.elements.id', array('default' => $user->id))    
+        <x-jangkeyte::forms.hidden name="id" label="" :value="$user->id" />  
         <div class="row">
-            <div class="col-md-6">
-                @include('Authetication::user.elements.name', array('default' => $user->name)) 
+            <div class="col-md-12 form-floating mb-3">
+                <x-jangkeyte::forms.text name="uid" label="Mã định danh" :value="$user->uid" disabled="disabled" />
             </div>
-            <div class="col-md-6">
-                @include('Authetication::user.elements.email', array('default' => $user->email)) 
+            <div class="col-md-6 form-floating mb-3">
+                <x-jangkeyte::forms.text name="name" label="Họ & tên" :value="$user->name" />
+            </div>
+            <div class="col-md-6 form-floating mb-3">
+                <x-jangkeyte::forms.text name="email" label="Địa chỉ email" :value="$user->email" />
+            </div>
+            <div class="col-md-6 form-floating mb-3">
+                <x-jangkeyte::forms.password name="password" label="Mật khẩu" :value="$user->password" />
+            </div>
+
+            @if(auth()->user()->hasRole('admin', 'administrator'))
+                <!-- Khu vực quản lý phân quyền -->
+                <div class="col-md-6 form-floating mb-3">
+                    <x-jangkeyte::forms.text name="username" label="Tên đăng nhập" :value="$user->username" />
+                </div>
+                <div class="col-md-6 form-floating mb-3">
+                    @include('Authetication::user.elements.role')
+                </div>
+            @endif
+
+            <div class="col-md-6 mb-3">
+                <x-jangkeyte::forms.image name="image" label="Hình ảnh" :value="$user->image" />
             </div>
         </div>
-        <div class="row">    
-            <div class="col-md-6">
-                @include('Authetication::user.elements.image')
-            </div>
-            <div class="col-md-6">
-                @include('Authetication::user.elements.password')            
-            </div>
-        </div>
-        @if(auth()->user()->hasRole('admin', 'administrator'))
-        <div class="row">    
-            <div class="col-md-6">
-                @include('Authetication::user.elements.role')
-            </div>
-            <div class="col-md-6">
-                @include('JangKeyte::commons.select', array('name' => 'cua_hang', 'label' => 'Cửa hàng', 'data' => array('133' => '133 Nguyễn Văn Trỗi')))            
-            </div>
-        </div>
-        @endif
         <div class="row">
             <div class="col-md-12 my-3 text-center">
                 <div class="form-group">
-                    <button class="btn btn-sm btn-success" type="submit"><i class="fa fa-save"></i> Lưu dữ liệu</button>
+                    <x-jangkeyte::forms.button text="Lưu dữ liệu" icon="fa fa-save" class="btn btn-sm btn-success" />
                 </div>
             </div>
         </div>
@@ -47,5 +49,5 @@
         </div>
     </div>
 </div>
-{!! Form::close() !!}
+{{ html()->form()->close() }}
 @endisset

@@ -21,6 +21,18 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        /*
+        try {
+            UserRole::get(['key_name', 'key_message'])->map(function ($permission) {
+              Gate::define($permission->key_name, function($user) use($permission) {
+                return $user->hasRole($permission->key_name) 
+                  ? Response::allow() 
+                  : Response::deny($permission->key_message);
+              });
+            });
+        } catch (\Exception $e) {
+            Return [];
+        }
+        */
     }
 }

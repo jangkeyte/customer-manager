@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\View\View;
-use Laravel\Socialite\Facades\Socialite;
+//use Laravel\Socialite\Facades\Socialite;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -20,7 +20,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create()
     {
-        return Socialite::driver('microsoft')->redirect();
+        //return Socialite::driver('microsoft')->redirect();
     }
 
     /**

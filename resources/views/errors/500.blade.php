@@ -8,4 +8,4 @@
     </div>
 @endsection
 
-@section('message', __('Rất tiếc, đã xảy ra lỗi trên máy chủ của chúng tôi.'))
+@section('message', __( empty( $exception->getMessage() ) ? 'Rất tiếc, đã xảy ra lỗi trên máy chủ của chúng tôi.' : $exception->getMessage() ) )

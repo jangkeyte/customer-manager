@@ -1,9 +1,0 @@
-<x-app-layout>
-@if(Auth::user()->haveRights('add_customer_1'))             
-    @include('customer.partials.customer-create-content-admin')
-@elseif(Auth::user()->haveRights('add_customer_0'))
-    @include('customer.partials.customer-create-content-user')
-@else
-    @include('customer.elements.khong_du_quyen')
-@endif
-</x-app-layout>

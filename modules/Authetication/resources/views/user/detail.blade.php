@@ -1,8 +1,8 @@
-@extends('JangKeyte::master')
+@extends('Authetication::master')
 
 @section('title', 'Chi tiết người dùng')
 
-@section('content')
+@section('entry_content')
 
 <div class="container g-0">
     <div class="row">

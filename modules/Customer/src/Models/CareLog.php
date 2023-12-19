@@ -32,8 +32,7 @@ class CareLog extends Model
      */
     public function customer()
     {
-        // return $this->belongsto('App\Models\Customer', 'foreign_key', 'local_key');
-    	return $this->belongsto('App\Models\Customer', 'ma_khach_hang', 'khach_hang');
+    	return $this->belongsto('Modules\Customer\src\Models\Customer', 'ma_khach_hang', 'khach_hang');
     }
     
     /**
@@ -41,8 +40,7 @@ class CareLog extends Model
      */
     public function user()
     {
-        // return $this->belongsto('App\Models\Staff', 'foreign_key', 'local_key');
-    	return $this->belongsto('App\Models\User', 'ma_nhan_vien', 'nhan_vien');
+    	return $this->belongsto('Modules\Customer\src\Models\User', 'ma_nhan_vien', 'nhan_vien');
     }
 
     /**
@@ -50,8 +48,7 @@ class CareLog extends Model
      */
     public function status()
     {
-        // return $this->hasOne('App\Models\Status', 'foreign_key', 'local_key');
-    	return $this->belongsto('App\Models\Status', 'tinh_trang', 'status');
+    	return $this->belongsto('Modules\Customer\src\Models\Status', 'tinh_trang', 'status');
     }
     
 }
