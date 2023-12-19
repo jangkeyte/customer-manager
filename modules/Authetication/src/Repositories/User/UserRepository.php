@@ -96,10 +96,11 @@ class UserRepository extends BaseRepository implements UserRepositoryInterface
      */
     public function updateUser(UpdateUserRequest $request)
     {
+        //dd($request->all());
         $request->name != '' ? $data['name'] = $request->name : '';
         $request->email != '' ? $data['email'] = $request->email : '';
-        $request->image != '' ? $data['image'] = $this->storeImage($request)  : $data['password'] = 'no';
-        $request->password != '' ? $data['password'] = Hash::make($request->password) : '';
+        $request->image != '' ? $data['image'] = $this->storeImage($request) : '';
+        (isset($request->password) && $request->password != null) ? $data['password'] = Hash::make($request->password) : '';
         
         return $this->model->find($request->id)->update($data);
     }

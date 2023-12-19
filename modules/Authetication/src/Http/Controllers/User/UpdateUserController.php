@@ -44,7 +44,7 @@ class UpdateUserController extends Controller
      */
     public function create($id): View
     {
-        if((!auth()->user()->hasRole('admin', 'administrator') && auth()->user()->id != $id)){
+        if((!auth()->user()->hasRole('admin', 'administrator', 'manager') && auth()->user()->id != $id)){
             abort(401);
         } else {
             $user = $this->userRepository->find($id);

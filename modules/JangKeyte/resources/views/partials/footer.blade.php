@@ -41,7 +41,7 @@
           <div class="d-flex flex-column flex-sm-row w-100 gap-2">
             <label for="newsletter1" class="visually-hidden">Địa chỉ Email</label>
             <input id="newsletter1" type="text" class="form-control" placeholder="Địa chỉ Email">
-            <button class="btn btn-primary" type="button">Gửi</button>
+            <button class="btn btn-primary" type="button"><i class="fa-solid fa-paper-plane"></i></button>
           </div>
         </form>
       </div>
