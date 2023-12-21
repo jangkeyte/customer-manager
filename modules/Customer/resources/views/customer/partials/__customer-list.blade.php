@@ -5,8 +5,8 @@
 </p>
 
 @isset($customers)
-    <div id="customer_list_content" class="table-responsive">
-        <table class="table table-sm table-bordered table-hover text-nowrap">
+    <div id="customer_list_content" class="table-responsive" style="min-height: 400px;">
+        <table class="table table-sm no-border table-hover text-nowrap">
             <col class="col1"/>
             <col class="col2"/>
             <col class="col3"/>
@@ -25,9 +25,9 @@
             <col class="col16"/>
             <col class="col17"/>
             <col class="col18"/>
-            <thead class="table-dark text-center align-middle">
+            <thead class="text-center align-middle">
                 <tr>
-                    <th>Stt 0</th>
+                    <th>Stt</th>
                     <th>Hành động 1</th>
                     <th>Tên khách hàng 2</th>
                     <th>Địa chỉ 3</th>
@@ -56,7 +56,7 @@
             <tbody class="align-middle">
             
             @foreach ($customers as $customer)
-                <tr class="table-{{ $customer->status->code }}">                
+                <tr>                
                 @if ($loop->count > 0)
                     @if(checkRoute('/customer'))
                         <td class="text-center">
@@ -70,14 +70,22 @@
                         </td>
                     @endif
                     <td><x-customer::action name="action" label="Chọn" :options="collect(array( 'id' => $customer->ma_khach_hang ))" /></td>
-                    <td>{{ $customer->ten_khach_hang }}</td>
+                    <td><span class="position-relative">{{ $customer->ten_khach_hang }} 
+                        @if($customer->tinh_trang == 1)
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger ms-3">
+                                Mới
+                                <span class="visually-hidden">Khách hàng mới</span>
+                            </span>
+                        @endif
+                        </span>
+                    </td>
                     <td class="text-center">{{ !empty($customer->province) && $customer->province->id != 0 ? $customer->province->name : $customer->dia_chi }}</td>
                     <td>{{ \Illuminate\Support\Str::substrReplace(str_replace(' ', '', $customer->so_dien_thoai), '***', 4, 3) }}</td>
                     <td class="text-center">{{ $customer->source->name ?? 'Chưa có' }}</td>
                     <td class="text-center">{{ $customer->channel->name ?? 'Chưa có' }}</td>
 
                     <td>{{ date('d/m/Y H:i:s', strtotime($customer->thoi_gian_nhan)) }}</td>
-                    <td>{{ $customer->status->name }}</td>
+                    <td class="text-center"><span class="badge rounded-pill bg-{{ $customer->status->code }} text-uppercase p-1 px-3">{{ substr($customer->status->name, 6) }}</span></td>
 
                     @if(checkRoute('/customer')) 
                         <td>{{ $customer->loai_xe }}</td>

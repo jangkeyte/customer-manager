@@ -41,7 +41,7 @@ class LoginController extends Controller
         if(!auth()->check()) {
             return view('Authetication::user.login');
         } else {
-            return redirect()->route('user.detail', $user->id);
+            return view('Customer::dashboard');
         }        
     }
 

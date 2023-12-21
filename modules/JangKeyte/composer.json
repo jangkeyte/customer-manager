@@ -1,0 +1,23 @@
+{
+    "name": "jangkeyte/jangkeyte",
+    "type": "package",
+    "description": "The main config for other modules",
+    "keywords": ["module", "package"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jang Keyte",
+            "email": "jangkeyte@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\": "vendor/jangkeyte/"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

@@ -13,9 +13,7 @@
 @else
 
     <div class="container-fluid">
-                    
-        @include('Customer::customer.partials.customer-list')
-
+                 
     </div>
 
 @endunless

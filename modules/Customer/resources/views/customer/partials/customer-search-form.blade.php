@@ -46,11 +46,11 @@
 
             <!-- Thời gian -->
             <div class="col-md-1 form-floating mb-3">
-                <x-jangkeyte::forms.date name="tu_ngay" label="Từ ngày" />   
+                <x-jangkeyte::forms.date name="tu_ngay" label="Từ ngày" :value="date('Y-m-d', strtotime('2022-06-01'))" />   
             </div>
 
             <div class="col-md-1 form-floating mb-3">
-                <x-jangkeyte::forms.date name="den_ngay" label="Đến ngày" />   
+                <x-jangkeyte::forms.date name="den_ngay" label="Đến ngày" :value="date('Y-m-d', strtotime(now()))" />   
             </div>
             
             <!-- Order by -->
@@ -63,9 +63,9 @@
                 <x-jangkeyte::forms.select name="sap_xep_theo" label="Chiều hướng" :options="$sap_xep_theo" />
             </div>
             
-            <!-- Nguồn khách -->
+            <!-- Nút xác nhận -->
             <div class="col-md-1 mb-2">
-                
+                <x-jangkeyte::forms.button text="Tìm kiếm" icon="fa fa-magnifying-glass" class="btn btn-sm btn-outline-primary" />                
             </div>
         </div>
     </form>

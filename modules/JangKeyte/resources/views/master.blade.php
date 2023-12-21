@@ -14,6 +14,7 @@
 
     <title>@yield('title', 'TOPCOM')</title>
     <link href="{{ asset('/assets/css/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('/assets/css/admin.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
     @stack('styles')
@@ -24,14 +25,16 @@
 </head>
 
 <body> 
-	<div id="wrapper">      
-        @include('JangKeyte::partials.header')
-     
-		<main id="main" class="mt-5 pt-3"> 
-            @yield('content')
-		</main><!-- #main -->
+	<div id="wrapper">
+        @include('JangKeyte::layouts.navigation')
+        <!-- main content -->
+        <div id="content-container" class="content-container" style="padding-left: 160px;">
+            <div class="content full-page">
+                @yield('content')
+            </div>
+        </div><!-- #main content -->
 
-        @include('JangKeyte::partials.footer')
+        {{-- @include('JangKeyte::partials.footer') --}}
 
 	</div><!-- #wrapper -->
 
@@ -40,6 +43,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <!-- Theme script -->
     <script type="text/javascript" src="{{ asset('assets/js/scripts.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/admin.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('assets/js/ui.js') }}"></script>
     @stack('scripts')
 </body>
 </html>

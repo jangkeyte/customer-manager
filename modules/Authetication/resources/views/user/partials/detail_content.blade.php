@@ -13,7 +13,14 @@
             </div>
         </div>
         <div id="userDetail" class="bg-light collapse show">
-            <div class="row">
+            <div class="row g-0">
+                <div class="col-md-3 text-center mt-md-4 my-2">
+                    @if(file_exists(public_path('/storage/uploads/users/' . $user->image))) 
+                        <img src="{!! asset('/storage/uploads/users/' . $user->image) !!}" class="img-thumbnail rounded-circle w-75" title="{!! $user->name !!}" alt="{!! $user->name !!}">
+                    @else 
+                        <svg xmlns="http://www.w3.org/2000/svg" height="auto" width="50%" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
+                    @endif
+                </div>
                 <div class="col-md-9">
                     <table class="table table-responsive table-striped table-bordered table-hover">
                         <tbody>
@@ -51,19 +58,6 @@
                             </tr>
                         </tbody>
                     </table>
-                </div>
-                <div class="col-md-3">
-                    <div class="row">
-                        <div class="col-md-12 text-center mt-3">
-                            @if(file_exists(public_path('/storage/uploads/users/' . $user->image))) 
-                                <img src="{!! asset('/storage/uploads/users/' . $user->image) !!}" class="w-100" title="{!! $user->name !!}" alt="{!! $user->name !!}">
-                            @else 
-                                <svg xmlns="http://www.w3.org/2000/svg" height="auto" width="50%" viewBox="0 0 448 512"><!--!Font Awesome Free 6.5.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2023 Fonticons, Inc.--><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512H418.3c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304H178.3z"/></svg>
-                            @endif
-                        </div>
-                        <div class="col-md-12 mgt10 mgb20">
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>

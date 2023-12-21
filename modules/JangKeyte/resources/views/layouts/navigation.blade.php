@@ -1,53 +1,27 @@
-<div class="d-flex flex-column flex-shrink-0 p-3 bg-body-tertiary" style="width: 280px;">
-    <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-      <svg class="bi pe-none me-2" width="40" height="32"><use xlink:href="#bootstrap"></use></svg>
-      <span class="fs-4">Sidebar</span>
-    </a>
-    <hr>
-    <ul class="nav nav-pills flex-column mb-auto">
-      <li class="nav-item">
-        <a href="#" class="nav-link active" aria-current="page">
-          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#home"></use></svg>
-          Home
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link link-body-emphasis">
-          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#speedometer2"></use></svg>
-          Dashboard
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link link-body-emphasis">
-          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#table"></use></svg>
-          Orders
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link link-body-emphasis">
-          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#grid"></use></svg>
-          Products
-        </a>
-      </li>
-      <li>
-        <a href="#" class="nav-link link-body-emphasis">
-          <svg class="bi pe-none me-2" width="16" height="16"><use xlink:href="#people-circle"></use></svg>
-          Customers
-        </a>
-      </li>
-    </ul>
-    <hr>
-    <div class="dropdown">
-      <a href="#" class="d-flex align-items-center link-body-emphasis text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-        <img src="https://github.com/mdo.png" alt="" width="32" height="32" class="rounded-circle me-2">
-        <strong>mdo</strong>
-      </a>
-      <ul class="dropdown-menu text-small shadow">
-        <li><a class="dropdown-item" href="#">New project...</a></li>
-        <li><a class="dropdown-item" href="#">Settings</a></li>
-        <li><a class="dropdown-item" href="{!! route('user.detail', auth()->user()->id) !!}">Profile</a></li>
-        <li><hr class="dropdown-divider"></li>
-        <li><a class="dropdown-item" href="{!! route('logout') !!}">Sign out</a></li>
-      </ul>
-    </div>
-  </div>
+<x-jangkeyte::navs.index>
+  <x-slot:title>
+      Server Error
+  </x-slot>
+
+  <x-jangkeyte::navs.quick-item url="/lead/create" label="Khách hàng" icon="icon lead-icon" />
+  <x-jangkeyte::navs.quick-item url="/quotation/create" label="Báo giá" icon="icon quotation-icon" />
+  <x-jangkeyte::navs.quick-item url="/mail/create" label="Email" icon="icon mail-icon" />
+  <x-jangkeyte::navs.quick-item url="/contacts/persons/create" label="Người" icon="person lead-icon" />
+  <x-jangkeyte::navs.quick-item url="/contacts/organizations/create" label="Tổ chức" icon="icon organization-icon" />
+  <x-jangkeyte::navs.quick-item url="/product/create" label="Sản phẩm" icon="icon product-icon" />
+  <x-jangkeyte::navs.quick-item url="/settings/attribute/create" label="Thuộc tính" icon="icon attribute-icon" />
+  <x-jangkeyte::navs.quick-item url="/settings/roles/create" label="Vai trò" icon="icon role-icon" />
+  <x-jangkeyte::navs.quick-item url="/settings/users/create" label="Người dùng" icon="icon user-icon" />  
+</x-jangkeyte::navs.index>
+
+<x-jangkeyte::menus.index>
+    <x-jangkeyte::menus.item url="/dashboard" label="Điều khiển" icon="icon sprite dashboard-icon" active="true" />
+    <x-jangkeyte::menus.item url="/customer" label="Khách hàng" icon="icon sprite leads-icon" />
+    <x-jangkeyte::menus.item url="/client" label="Báo giá" icon="icon sprite quotes-icon" />
+    <x-jangkeyte::menus.item url="/mail/inbox" label="Hộp thư" icon="icon sprite emails-icon" active="active" :submenus="collect(array(['url' => '/mail/compose', 'label' => 'Soạn thư'],['url' => '/mail/inbox', 'label' => 'Hộp thư đến'],['url' => '/mail/draft', 'label' => 'Bản nháp'],['url' => '/mail/outbox', 'label' => 'Hộp thư đi'],['url' => '/mail/sent', 'label' => 'Thư đã gửi'],['url' => '/mail/trash', 'label' => 'Thùng rác']))" />
+    <x-jangkeyte::menus.item url="/activities" label="Hoạt động" icon="icon sprite activities-icon" />
+    <x-jangkeyte::menus.item url="/contacts/persons" label="Liên hệ" icon="icon sprite phone-icon" :submenus="collect(array(['url' => '/contacts/person', 'label' => 'Người'],['url' => '/contacts/organizations', 'label' => 'Tổ chức']))" />
+    <x-jangkeyte::menus.item url="/products" label="Sản phẩm" icon="icon sprite products-icon" />
+    <x-jangkeyte::menus.item url="/settings" label="Cài đặt" icon="icon sprite settings-icon" />
+    <x-jangkeyte::menus.item url="/configuration" label="Cấu hình" icon="icon sprite tools-icon" />
+</x-jangkeyte::menus.index>

@@ -1,0 +1,24 @@
+{
+    "name": "jangkeyte/authetication",
+    "type": "package",
+    "description": "The authetication module with roles and permission",
+    "keywords": ["module", "package"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jang Keyte",
+            "email": "jangkeyte@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "jangkeyte/jangkeyte": "1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Modules\\": "vendor/jangkeyte/"
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}

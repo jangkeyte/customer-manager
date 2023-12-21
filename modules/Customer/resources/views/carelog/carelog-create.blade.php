@@ -38,7 +38,7 @@
                         @endisset
 
                         <div class="col-md-12 form-floating mb-3">
-                            {!! Form::text('ghi_chu', $customer->ghi_chu, array('class' => 'form-control', 'disabled' => 'disabled')); !!}
+                            {!! Form::text('ghi_chu', $customer->ghi_chu, array('class' => 'form-control')); !!}
                             {!! Form::label('ghi_chu', 'Ghi chú'); !!}
                         </div>
 
