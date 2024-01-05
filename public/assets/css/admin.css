@@ -72,7 +72,8 @@
 .avatar-icon {
     background-image: url(../images/avatar-icon.svg);
     height: 21px;
-    width: 16px
+    width: 16px;
+    margin-left: 3px;
 }
 
 .avatar-dark-icon {
@@ -974,7 +975,8 @@ body {
     position: fixed;
     top: 60px;
     width: 48px;
-    z-index: 2
+    z-index: 2;
+    transition: width 0.15s;
 }
 
 .navbar-left ul.menubar li.menu-item {
@@ -988,6 +990,11 @@ body {
     display: block;
     padding: 16px 12px;
     width: 100%
+}
+
+.menubar-bottom>span:hover {
+    color: #546e7a;
+    display: block;
 }
 
 .navbar-left ul.menubar li.menu-item>a .icon {
@@ -1057,7 +1064,7 @@ body {
 .navbar-left.open ul.menubar li.menu-item a .menu-label {
     color: #b0bec5;
     display: inline-block;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 200
 }
 

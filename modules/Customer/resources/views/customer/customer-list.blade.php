@@ -6,14 +6,14 @@
 
     @include('Customer::customer.partials.customer-search-form')
 
-    <p>Danh sách Khách hàng [{{$customers->count()}}] 
+    <p>Khách hàng [{{$customers->count()}}] 
         <button id="btnHide" class="btn btn-sm btn-outline-primary" style="float:right">Thu gọn</button>
         <a href="{{ route( substr(Route::current()->getPrefix(), 1) . '.create' ) }}" class="btn btn-sm btn-outline-success mx-2" style="float:right"><i class="fa fa-user-plus"></i> Tạo mới</a>
     </p>
 
     @isset($customers)
-        <div id="customer_list_content" class="table-responsive" style="min-height: 400px;">
-            <table class="table table-sm table-hover text-nowrap">
+        <div id="customer_list_content" class="table-responsive w-100" style="min-height: 400px;">
+            <table id="customerTable" class="table table-sm table-hover text-nowrap">
                 <col class="col1"/>
                 <col class="col2"/>
                 <col class="col3"/>
@@ -34,30 +34,30 @@
                 <col class="col18"/>
                 <thead class="text-center align-middle">
                     <tr>
-                        <th>Stt 0</th>
-                        <th>Hành động 1</th>
-                        <th>Tên khách hàng 2</th>
-                        <th>Địa chỉ 3</th>
-                        <th>Số điện thoại 4</th>
-                        <th>Nguồn khách 5</th>
-                        <th>Kênh liên hệ 6</th>
-                        <th>Ngày nhập 7</th>
-                        <th>Tình trạng 8</th>
-                        <th>Loại xe 9</th>
-                        <th>Màu xe 10</th>
+                        <th>Stt</th>
+                        <th>Hành động</th>
+                        <th>Tên khách hàng</th>
+                        <th>Địa chỉ</th>
+                        <th>Số điện thoại</th>
+                        <th>Nguồn khách</th>
+                        <th>Kênh liên hệ</th>
+                        <th>Ngày nhập</th>
+                        <th>Tình trạng</th>
+                        <th>Loại xe</th>
+                        <th>Màu xe</th>
                         @if(checkRoute('/customer'))
-                        <th>Số khung 11</th>
-                        <th>Số máy 12</th>
+                        <th>Số khung</th>
+                        <th>Số máy</th>
                         @endif
                         @if(!auth()->user()->hasRole('user','guest'))
                             @if(!auth()->user()->hasRole('leader'))
-                                <th>Cửa hàng 13</th>
+                                <th>Cửa hàng</th>
                             @endif
-                            <th>Nhân viên 14</th>
+                            <th>Nhân viên</th>
                         @endif
-                        <th>Ngày chăm sóc 15</th>
-                        <th>Nội dung chăm sóc 16</th>
-                        <th>Ghi chú 17</th>
+                        <th>Ngày chăm sóc</th>
+                        <th>Nội dung chăm sóc</th>
+                        <th>Ghi chú</th>
                     </tr>
                 </thead>
                 <tbody class="align-middle">
@@ -65,17 +65,10 @@
                 @foreach ($customers as $customer)
                     <tr>                
                     @if ($loop->count > 0)
-                        @if(checkRoute('/customer'))
-                            <td class="text-center">
-                                <a href="{!! route( 'customer.detail', $customer->ma_khach_hang ) !!}">
-                                    {{ $loop->index + 1 + (( $customers->currentPage() - 1 ) * $customers->perPage()) }}
-                                </a>
-                            </td>
-                        @else
-                            <td class="text-center">
-                                {{ $loop->index + 1 + (( $customers->currentPage() - 1 ) * $customers->perPage()) }}
-                            </td>
-                        @endif
+                        <td class="text-center">
+                            {{ $loop->index + 1 }}
+                            {{-- $loop->index + 1 + (( $customers->currentPage() - 1 ) * $customers->perPage()) --}}
+                        </td>
                         <td><x-customer::action name="action" label="Chọn" :options="collect(array( 'id' => $customer->ma_khach_hang ))" /></td>
                         <td><span class="position-relative">{{ $customer->ten_khach_hang }} 
                             @if($customer->tinh_trang == 1)
@@ -129,11 +122,13 @@
                 @endforeach
                 </tbody>
             </table>  
-            {{ $customers->onEachSide(2)->links() }}
+            {{-- $customers->onEachSide(2)->links() --}}
         </div>
 
         @push('scripts')
         <script>
+        /*let table = new DataTable('#customerTable');*/
+
         jQuery(document).ready(function($) {
             $(".clickable-row").click(function() {
                 window.location = $(this).data("href");

@@ -52,7 +52,33 @@ if (! function_exists('checkRoute')) {
 }
 
 /**
- * checkRoute.
+ * checkEmpty.
+ *
+ * @return void
+ */
+if (! function_exists('getRouteName')) {
+    function getRouteName()
+    {
+        $routeName = substr(Route::current()->getPrefix(), 1);
+        return str_replace(".search","",$routeName);
+    }
+}
+
+/**
+ * checkEmpty.
+ *
+ * @return void
+ */
+if (! function_exists('getRouteNameWithAction')) {
+    function getRouteNameWithAction($action)
+    {
+        $routeName = Route::current()->getName().'.'.$action;
+        return str_replace(".search","",$routeName);
+    }
+}
+
+/**
+ * checkEmpty.
  *
  * @return void
  */
@@ -77,6 +103,7 @@ if (! function_exists('routeAction')) {
     {
         // Kiểm tra nếu có truyền tên route thì lấy tên route, nếu không thì tự lấy từ route prefix
         $route = $routeName == '' ? substr(Route::current()->getPrefix(), 1) : $routeName;
+        $route = str_replace(".search","",$route);
 
         // Phương thức mặc định là "get" thì theo quy chuẩn gọi tên route trước action
         if($method == 'get') {

@@ -53,6 +53,6 @@ class CreateCustomerController extends Controller
     {
         //dd($request->all());
         $customer = $this->customerRepository->createCustomer($request); 
-        return redirect()->back();
+        return redirect()->route(getRouteName());
     }
 }

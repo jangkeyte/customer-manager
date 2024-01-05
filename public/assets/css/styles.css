@@ -117,3 +117,12 @@ select.btn-mini + .caret {
     margin-left: -20px;
     margin-top: 9px;
 }
+
+.table-sm>:not(caption)>*>* {
+  padding: 0.1rem;
+  font-size: 12px;
+}
+
+.input-group>.form-floating:not(:focus-within){
+  z-index:0!important;
+}

@@ -13,10 +13,14 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>@yield('title', 'TOPCOM')</title>
-    <link href="{{ asset('/assets/css/styles.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/css/admin.css') }}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" rel="stylesheet">
+    <link href="{{ asset('/assets/css/styles.css') }}" rel="stylesheet">
+    <link href="{{ asset('/assets/css/admin.css') }}" rel="stylesheet">
+    <link href="{{ asset('/assets/css/ui.css') }}" rel="stylesheet">
+    <link href="{{ asset('/assets/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+    <!-- <link href="{{ asset('/assets/css/jkanban.min.css') }}" rel="stylesheet"> -->
+    
     @stack('styles')
 
 	<link href="/favicon.ico" rel="shortcut icon" type="image/x-icon" />
@@ -27,8 +31,9 @@
 <body> 
 	<div id="wrapper">
         @include('JangKeyte::layouts.navigation')
+
         <!-- main content -->
-        <div id="content-container" class="content-container" style="padding-left: 160px;">
+        <div id="content-container" class="content-container">
             <div class="content full-page">
                 @yield('content')
             </div>
@@ -42,6 +47,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <!-- Theme script -->
+    <script type="text/javascript" src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
+    <!-- <script type="text/javascript" src="{{ asset('assets/js/jkanban.min.js') }}"></script> -->
     <script type="text/javascript" src="{{ asset('assets/js/scripts.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/admin.js') }}"></script>
     <script type="text/javascript" src="{{ asset('assets/js/ui.js') }}"></script>

@@ -48,6 +48,7 @@
                                 </div>
                             </div>
                         </div>
+                        
                         <!--
                         <div class="text-center card-box">
                             <div class="member-card pt-2 pb-2">
@@ -108,3 +109,5 @@
         
     @endisset
 @endif
+
+@endsection

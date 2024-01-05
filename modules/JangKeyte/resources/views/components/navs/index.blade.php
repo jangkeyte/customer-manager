@@ -5,7 +5,7 @@
 	<div class="navbar-top-right">
 		<x-jangkeyte::navs.quick-create>
 			{{ $slot }}
-		</x-jangkeyte::quick-create>
+		</x-jangkeyte::navs.quick-create>
 		
 		<x-jangkeyte::navs.profile-info />
 	</div>

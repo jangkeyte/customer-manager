@@ -13,6 +13,7 @@ Route::middleware('web')->group(function () {
         
         // Xem danh sách Khách hàng
         Route::get('/', [CustomerController::class, 'create'])->middleware('permission:browse-customer')->name('customer');
+        Route::get('test', [CustomerController::class, 'test'])->name('customer.test');
             
         // Xem thông tin khách hàng
         Route::get('detail/{id}', [CustomerController::class, 'show'])->middleware('permission:read-customer')->name('customer.detail');

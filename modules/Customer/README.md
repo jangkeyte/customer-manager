@@ -1,0 +1,2 @@
+Thêm dòng "Modules\\": "modules/" trong autoload psr-4 của file composer.json gốc
+Thêm dòng Modules\ModuleServiceProvider::class trong providers của file config/app.php để đăng ký Service Provider của Module

@@ -1,4 +1,4 @@
-@extends('JangKeyte::master')
+@extends('Authetication::master')
 
 @section('title', 'Cập nhật người dùng')
 

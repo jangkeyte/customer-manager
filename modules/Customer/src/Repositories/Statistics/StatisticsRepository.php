@@ -134,7 +134,7 @@ class StatisticsRepository extends BaseRepository implements StatisticsRepositor
     // Xử lý lấy kết quả trả về
     public function getResultOfObject($countByObject, $objectID, $objectName)
     {
-        $result = array('0' => 'Tất cả - [' . $countByObject->sum('so_khach') . ']');
+        $result = array('' => 'Tất cả - [' . $countByObject->sum('so_khach') . ']');
         if(!empty($countByObject)){
             foreach($countByObject as $object)
             { 

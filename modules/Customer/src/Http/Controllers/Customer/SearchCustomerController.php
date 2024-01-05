@@ -26,26 +26,29 @@ class SearchCustomerController extends Controller
         $this->statisticsRepository = $statisticsRepository;
     }
 
+    /*
     public function search(Request $request)
     {   
         $customers = $this->customerRepository->getCustomersByKeyword(0, $request->value);
         return response()->json($customers);
     }
-
-    public function find(Request $request)
+    */
+    
+    public function store(Request $request)
     {   
-        if(Route::currentRouteName() == 'timkhachhang') { $loai_khach = 1; } else { $loai_khach = 0; }
-        
         $customers = $this->customerRepository->find($request);
-        $statistics = $this->statisticsRepository->getStatisticsList($loai_khach);
+        $statistics = $this->statisticsRepository->getStatisticsList();
 
-        return view('customer.customer-dashboard', [
+        return view('Customer::customer.customer-list', [
             'customers' => $customers,
-            'thoi_gian' => $statistics['date'],
-            'tinh_trang' => $statistics['status'],
-            'nhan_vien' => $statistics['user'],
-            'cua_hang' => $statistics['store'],
-            'nguon_khach' => $statistics['source'],
+            'thoi_gian' => collect($statistics['date']),
+            'tinh_trang' => collect($statistics['status']),
+            'nhan_vien' => collect($statistics['user']),
+            'cua_hang' => collect($statistics['store']),
+            'nguon_khach' => collect($statistics['source']),
+            'kenh_lien_he' => collect($statistics['channel']),
+            'sap_xep' => collect(array('cua_hang' => 'Cửa hàng', 'nhan_vien' => 'Nhân viên', 'nguon_khach' => 'Nguồn khách', 'tinh_trang' => 'Tình trạng', 'thoi_gian' => 'Thời gian')),
+            'sap_xep_theo' => collect(array('asc' => 'Tăng dần', 'desc' => 'Giảm dần'))
         ]);
     }
 }

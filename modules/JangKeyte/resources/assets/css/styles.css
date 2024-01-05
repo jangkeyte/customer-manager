@@ -1,5 +1,124 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
-:root{--primary:#007bff;--header-height: 3rem;--nav-width: 68px;--first-color: #4723D9;--first-color-light: #AFA5D9;--white-color: #F7F6FB;--body-font: 'Nunito', sans-serif;--normal-font-size: 1rem;--z-fixed: 100}
+:root{--primary:#007bff;--header-height: 3rem;--nav-width: 68px;--first-color: #4723D9;--first-color-light: #AFA5D9;--white-color: #F7F6FB;--body-font: 'Roboto', sans-serif;--bs-body-font-family: var(--body-font)!important;--normal-font-size: 1rem;--z-fixed: 100}
 *,::before,::after{box-sizing: border-box}
 body{position: relative;margin: var(--header-height) 0 0 0;padding: 0 1rem;font-family: var(--body-font);font-size: var(--normal-font-size);transition: .5s}
-a{text-decoration: none}
+a{text-decoration: none!important;}
+table th {word-wrap: none;}
+:root {
+    --bs-body-font-size: 0.85rem!important;
+}
+.btn-group-sm>.btn, .btn-sm {
+    --bs-btn-font-size: 0.85rem!important;
+}
+.dropdown-menu {
+    --bs-dropdown-font-size: 0.85rem!important;
+}
+.form-control {
+    font-size: 0.85rem!important;
+}
+.form-select {
+    font-size: 0.85rem!important;
+}
+table th {
+    height: 40px;
+    padding: 5px!important;
+}
+ol, ul.menubar {padding-left: 0rem!important;}
+ol, ul.sub-menubar {padding-left: 0rem!important;}
+
+svg#freepik_stories-login:not(.animated) .animable {
+    opacity: 0;
+  }
+  svg#freepik_stories-login.animated #freepik--background-complete--inject-7 {
+    animation: 1s 1 forwards cubic-bezier(0.36, -0.01, 0.5, 1.38) slideDown;
+    animation-delay: 0s;
+  }
+  svg#freepik_stories-login.animated #freepik--Shadow--inject-7 {
+    animation: 1s 1 forwards cubic-bezier(0.36, -0.01, 0.5, 1.38) slideUp;
+    animation-delay: 0s;
+  }
+  svg#freepik_stories-login.animated #freepik--Login--inject-7 {
+    animation: 1s 1 forwards cubic-bezier(0.36, -0.01, 0.5, 1.38) zoomIn,
+      1.5s Infinite linear floating;
+    animation-delay: 0s, 1s;
+  }
+  svg#freepik_stories-login.animated #freepik--Character--inject-7 {
+    animation: 1s 1 forwards cubic-bezier(0.36, -0.01, 0.5, 1.38) zoomOut;
+    animation-delay: 0s;
+  }
+  @keyframes slideDown {
+    0% {
+      opacity: 0;
+      transform: translateY(-30px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  @keyframes slideUp {
+    0% {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    100% {
+      opacity: 1;
+      transform: inherit;
+    }
+  }
+  @keyframes zoomIn {
+    0% {
+      opacity: 0;
+      transform: scale(0.5);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+  @keyframes floating {
+    0% {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0px);
+    }
+  }
+  @keyframes zoomOut {
+    0% {
+      opacity: 0;
+      transform: scale(1.5);
+    }
+    100% {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+select.btn-mini {
+    height: auto;
+    line-height: 14px;
+}
+
+/* this is optional (see below) */
+select.btn {
+    -webkit-appearance: button;
+       -moz-appearance: button;
+            appearance: button;
+    padding-right: 16px;
+}
+
+select.btn-mini + .caret {
+    margin-left: -20px;
+    margin-top: 9px;
+}
+
+.table-sm>:not(caption)>*>* {
+  padding: 0.1rem;
+  font-size: 12px;
+}

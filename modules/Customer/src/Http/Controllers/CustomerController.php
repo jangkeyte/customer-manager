@@ -2,6 +2,7 @@
 
 namespace Modules\Customer\src\Http\Controllers;
 
+use Modules\Customer\src\DataTables\CustomersDataTable;
 use Modules\Customer\src\Helpers\PaginationHelper;
 use Modules\Customer\src\Http\Controllers\Controller;
 use Modules\Customer\src\Repositories\Statistics\StatisticsRepositoryInterface;
@@ -12,6 +13,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+
 
 class CustomerController extends Controller
 {
@@ -30,6 +32,11 @@ class CustomerController extends Controller
     {
         $this->customerRepository = $customerRepository;
         $this->statisticsRepository = $statisticsRepository;
+    }
+
+    public function test(CustomersDataTable $dataTable)
+    {
+        return $dataTable->render('Customer::customer.test');
     }
 
     /**

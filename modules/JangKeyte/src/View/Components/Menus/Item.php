@@ -17,8 +17,8 @@ class Item extends Component
         public ?string $url = null,  
         public ?string $label = null,   
         public ?string $icon = null,
-        public ?string $active = null,      
-        public ?Collection $submenus = new Collection,
+        public ?string $active = null,
+        public ?string $right = null,
     ) {}
  
     /**

@@ -1,0 +1,25 @@
+{
+    "name": "jangkeyte/customer",
+    "description": "The customer manager module",
+    "type": "library",
+    "keywords": ["jangkeyte","customer manager","jangkeyte.com"],
+    "homepage": "https://github.com/jangkeyte/module-customer",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Jang Keyte",
+            "email": "jangkeyte@gmail.com",
+            "homepage": "https://jangkeyte.com",
+            "role": "Developer"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^7.0",
+    },
+    "autoload": {
+        "psr-4": {
+            "jangkeyte\\Customer\\": "src/"
+        }
+    }
+}
