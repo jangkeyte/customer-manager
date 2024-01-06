@@ -5,6 +5,8 @@ use Modules\Customer\src\Http\Controllers\Customer\CreateCustomerController;
 use Modules\Customer\src\Http\Controllers\Customer\UpdateCustomerController;
 use Modules\Customer\src\Http\Controllers\Customer\RemoveCustomerController;
 use Modules\Customer\src\Http\Controllers\Customer\SearchCustomerController;
+use Modules\Customer\src\Http\Controllers\Customer\ImportCustomerController;
+
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('web')->group(function () {
@@ -39,8 +41,8 @@ Route::middleware('web')->group(function () {
         Route::get('exportbycondition', [UserController::class, 'exportbycondition'])->name('customer.exportbycondition')->middleware('permission:export-customer');
 
         // Nhập dữ liệu khách hàng
-        Route::get('import', [ImportCustomerController::class, 'create']);
-        Route::post('import', [ImportCustomerController::class, 'store'])->name('customer.import')->middleware('permission:import-customer');
+        Route::get('import', [ImportCustomerController::class, 'create'])->name('customer.import');
+        Route::post('import', [ImportCustomerController::class, 'store'])->name('import.customer')->middleware('permission:add-customer');
     });
     
     Route::group(['prefix' => 'client', 'middleware' => 'auth'], function () {

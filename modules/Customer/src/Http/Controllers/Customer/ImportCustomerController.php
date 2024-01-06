@@ -1,21 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace Modules\Customer\src\Http\Controllers\Customer;
 
-use Illuminate\Http\Request;
+use Modules\Customer\src\Imports\CustomersImport;
 use App\Http\Controllers\Controller;
-
-use App\Imports\UsersImport;
-use App\Imports\CustomersImport;
-use App\Imports\CareLogsImport;
+use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
-class ImportController extends Controller
+class ImportCustomerController extends Controller
 {
-    public function index(){
-        return view('import/import-dashboard');
+    public function create(){
+        return view('Customer::customer.customer-import');
     }
     
+    /*
     public function importUser(Request $request) 
     {
         //$root_folder = 'uploads/data/';
@@ -25,18 +23,19 @@ class ImportController extends Controller
         
         return view('import/import-dashboard')->with('success', 'Nhập người dùng thành công!');
     }
+    */
 
-    public function importCustomer(Request $request) 
+    public function store(Request $request) 
     {
         $root_folder = 'uploads/data/';
         $fileName = $this->upload_file($request, 'customer', $root_folder);
-   
         Excel::import(new CustomersImport, $root_folder.$fileName);
         //Excel::import(new CustomersImport, 'uploads/data/customers.xlsx');
         
         return view('import/import-dashboard')->with('success', 'Nhập Khách hàng thành công!');
     }
 
+    /*
     public function importCareLog(Request $request) 
     {
         //$root_folder = 'uploads/data/';
@@ -47,6 +46,7 @@ class ImportController extends Controller
 
         return view('import/import-dashboard')->with('success', 'Nhập chăm sóc Khách thành công!');
     }
+    */
 
     /**
      * Display a listing of the resource.
