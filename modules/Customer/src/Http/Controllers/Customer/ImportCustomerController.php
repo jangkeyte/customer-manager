@@ -32,7 +32,7 @@ class ImportCustomerController extends Controller
         Excel::import(new CustomersImport, $root_folder.$fileName);
         //Excel::import(new CustomersImport, 'uploads/data/customers.xlsx');
         
-        return view('import/import-dashboard')->with('success', 'Nhập Khách hàng thành công!');
+        return view('Customer::customer.customer-import')->with('success', 'Nhập Khách hàng thành công!');
     }
 
     /*

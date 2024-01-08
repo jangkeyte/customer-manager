@@ -1,24 +1,18 @@
-@extends('JangKeyte::container')
-
-@section('header-title', 'Tạo mới tài khoản')
-
-@section('main-content')
-
 {!! Form::open(array('url' => route('user.create'), 'method' => 'post', 'files' => true)) !!}
     <div class="row">
-        <div class="col-md-6">
-            @include('JangKeyte::commons.text', array('name' => 'name', 'label' => 'Họ và tên')) 
+        <div class="col-md-6 form-floating mb-3">
+            <x-jangkeyte::forms.text name="name" label="Họ & tên" />
         </div>
-        <div class="col-md-6">
-            @include('JangKeyte::commons.text', array('name' => 'email', 'label' => 'Địa chỉ email')) 
+        <div class="col-md-6 form-floating mb-3">
+            <x-jangkeyte::forms.text name="email" label="Địa chỉ email" />
         </div>
     </div>
     <div class="row">
-        <div class="col-md-6">
-            @include('Authetication::user.elements.image')
+        <div class="col-md-6 form-floating mb-3">
+            <x-jangkeyte::forms.image name="image" label="Hình ảnh" />
         </div>
-        <div class="col-md-6">
-            @include('JangKeyte::commons.password', array('name' => 'password', 'label' => 'Mật khẩu')) 
+        <div class="col-md-6 form-floating mb-3">
+            <x-jangkeyte::forms.password name="password" label="Mật khẩu" /> 
         </div>
     </div>
     @if(auth()->user()->hasRole('admin', 'administrator'))
@@ -39,5 +33,3 @@
         </div>
     </div>
 {!! Form::close() !!}
-
-@stop
