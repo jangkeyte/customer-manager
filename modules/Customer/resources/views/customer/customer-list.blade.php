@@ -122,7 +122,7 @@
                 @endforeach
                 </tbody>
             </table>  
-            {{-- $customers->onEachSide(2)->links() --}}
+            {{ $customers->onEachSide(2)->links() }}
         </div>
 
         @push('scripts')

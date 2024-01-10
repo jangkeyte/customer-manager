@@ -32,7 +32,7 @@ class CustomerRepository extends BaseRepository implements CustomerRepositoryInt
     // Lấy danh sách toàn bộ Khách hàng
     public function getCustomers()
     {
-        return $this->model->get();
+        return $this->model->paginate(20);
     }
 
     // Lấy thông tin Khách hàng theo Mã Khách hàng
@@ -48,7 +48,7 @@ class CustomerRepository extends BaseRepository implements CustomerRepositoryInt
         $result = $this->model
             ->filter(new CustomerFilter($request))
             ->orderBy($request->sap_xep ?? 'ngay_nhap', $request->sap_xep_theo ?? 'asc')
-            ->get();            
+            ->paginate(100);            
         //dd($result);
         return $result; 
     }

@@ -27,12 +27,27 @@ class ImportCustomerController extends Controller
 
     public function store(Request $request) 
     {
-        $root_folder = 'uploads/data/';
-        $fileName = $this->upload_file($request, 'customer', $root_folder);
-        Excel::import(new CustomersImport, $root_folder.$fileName);
-        //Excel::import(new CustomersImport, 'uploads/data/customers.xlsx');
+        try {
+            //$inputs = $request->all();
+            //$this->setInputEncoding($inputs['file']);
+            $root_folder = 'uploads/data/';
+            $fileName = $this->upload_file($request, 'customer', $root_folder);
+            Excel::import(new CustomersImport, $root_folder.$fileName);
+            //Excel::import(new CustomersImport, $inputs['file']);
+
+            return view('Customer::customer.customer-import')->with('success', 'Nhập Khách hàng thành công!');
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+            $failures = $e->failures();
+            return view('Customer::customer.customer-import')->with('failures', $failures);
+        }
+
+    }
+
+    function setInputEncoding($file) {
+        $fileContent = file_get_contents($file->path());
+        $enc = mb_detect_encoding($fileContent, mb_list_encodings(), true);
         
-        return view('Customer::customer.customer-import')->with('success', 'Nhập Khách hàng thành công!');
+        \Config::set('excel.imports.csv.input_encoding', $enc);
     }
 
     /*
@@ -59,6 +74,18 @@ class ImportCustomerController extends Controller
         $request->validate([
             'file' => 'required|mimes:pdf,xlsx,xlx,csv|max:204800',
         ]);
+
+        try {
+            $inputs = $request->all();
+            setInputEncoding($inputs['file']);
+            Excel::import(new ModelImport, $inputs['file']);
+
+            return redirect()->back()->with('success', 'Upload File Thành Công');
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+            $failures = $e->failures();
+
+            return redirect()->back()->with('failures', $failures);
+        }
         */
 
         $fileName = date("YmdHis",time()).'_'.$type.'.'.$request->file->extension();  

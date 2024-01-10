@@ -3,12 +3,16 @@
 namespace Modules\Customer\src\Imports;
 
 use Modules\Customer\src\Models\Customer;
+use Maatwebsite\Excel\Concerns\WithStartRow;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
+use Maatwebsite\Excel\Concerns\WithValidation;
+use Illuminate\Contracts\Queue\ShouldQueue;
+use Maatwebsite\Excel\Concerns\WithChunkReading;
 
 use Illuminate\Support\Collection;
 
-class CustomersImport implements ToCollection, WithHeadingRow
+class CustomersImport implements ToCollection, WithHeadingRow, WithChunkReading, WithStartRow, WithValidation, ShouldQueue
 {
     /**
     * @param array $row
@@ -41,9 +45,29 @@ class CustomersImport implements ToCollection, WithHeadingRow
                 'cua_hang' => $row['cua_hang'] ?? (config('customer.default.cua_hang') ?? auth()->user()->staff->cua_hang),
                 'tinh_trang' => $row['tinh_trang'] ?? 0,
                 'loai_khach' => $row['loai_khach'] ?? 0,
-                'ngay_nhap' => isset($row['thoi_gian_nhan'])  && $row['thoi_gian_nhan'] != '' ? date("Y-m-d", strtotime($row['thoi_gian_nhan'])) : date('Y-m-d H:i:s'), 
+                'ngay_nhap' => $row['ngay_mua'] != '' || $row['ngay_mua'] == 'NULL' ? $row['ngay_mua'] : $row['ngay_lien_he'], //isset($row['thoi_gian_nhan'])  && $row['thoi_gian_nhan'] != '' ? date("Y-m-d", strtotime($row['thoi_gian_nhan'])) : date('Y-m-d H:i:s'), 
                 'ghi_chu' => $row['ghi_chu'] ?? config('customer.default.ghi_chu')
             ]);
         }
+    }
+
+    public function rules(): array
+    {
+        return [
+            'ma_khach_hang' => [
+                'required',
+                'string',
+            ],
+        ];
+    }
+
+    public function chunkSize(): int
+    {
+        return 1000;
+    }
+
+    public function startRow(): int
+    {
+        return 2;
     }
 }
