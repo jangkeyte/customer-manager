@@ -1,6 +1,6 @@
 @extends('JangKeyte::layouts.guest')
 
-@section('title', 'Nhập xuất người dùng')
+@section('title', 'Đăng nhập hệ thống')
 
 @section('content')
 

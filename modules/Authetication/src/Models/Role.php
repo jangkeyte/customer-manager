@@ -13,13 +13,13 @@ class Role extends Model
 
     public function permissions() {
 
-        return $this->belongsToMany(Permission::class,(config('authetication.table_prefix') ?? '') . 'roles_permissions');
+        return $this->belongsToMany( Permission::class, ( config( 'authetication.table_prefix' ) ?? '' ) . 'roles_permissions' );
             
     }
     
     public function users() {
      
-        return $this->belongsToMany(User::class,(config('authetication.table_prefix') ?? '') . 'users_roles');
+        return $this->belongsToMany( User::class, ( config( 'authetication.table_prefix' ) ?? '' ) . 'users_roles' );
             
     }
 }

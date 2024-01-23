@@ -4,6 +4,7 @@
   </x-slot>
   <x-jangkeyte::navs.quick-item url="{{ route('customer.create') }}" label="Khách hàng" icon="icon person-icon" />
   <x-jangkeyte::navs.quick-item url="{{ route('client.create') }}" label="Tiềm năng" icon="icon lead-icon" />
+  <x-jangkeyte::navs.quick-item url="{{ route('customer.import') }}" label="Khách hàng" icon="icon person-icon" />
   <x-jangkeyte::navs.quick-item url="/quotation/create" label="Báo giá" icon="icon quotation-icon" />
   <x-jangkeyte::navs.quick-item url="/mail/create" label="Email" icon="icon mail-icon" right="delete-user" />
   <x-jangkeyte::navs.quick-item url="/contacts/persons/create" label="Người" icon="person lead-icon" right="delete-user" />

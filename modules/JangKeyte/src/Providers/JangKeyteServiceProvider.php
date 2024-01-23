@@ -82,4 +82,27 @@ class JangKeyteServiceProvider extends ServiceProvider
             }
         }
     }
+    
+    protected function rootBoot()
+    {        
+        $this->loadViewsFrom(__DIR__ . '/JangKeyte/resources/views', 'JangKeyte');
+        $this->publishes([
+            __DIR__.'/JangKeyte/resources/views/commons' => resource_path('views/commons'),
+        ], 'jangkeyte-commons');
+
+        $this->publishes([
+            __DIR__.'/JangKeyte/resources/views/templates' => resource_path('views/templates'),
+        ], 'jangkeyte-templates');
+
+        Paginator::defaultView('JangKeyte::commons.paginator');
+        Paginator::defaultSimpleView('JangKeyte::commons.simple_paginator');
+
+        Blade::directive('ocb', function () {
+            return '<?php echo "{{ " ?>';
+        });
+
+        Blade::directive('ccb', function () {
+            return '<?php echo " }}" ?>';
+        });
+    }
 }

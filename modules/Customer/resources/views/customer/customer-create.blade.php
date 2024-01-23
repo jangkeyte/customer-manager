@@ -96,7 +96,7 @@
                                     
                                     <!-- Người chuyển -->
                                     <div class="col-md-4 form-floating mb-3 visually-hidden">
-                                        <x-jangkeyte::forms.select name="nguoi_chuyen" label="Người chuyển" icon="fa-solid fa-people-arrows" :options="$danh_sach_nhan_vien" :value="auth()->user()->staff->ma_nhan_vien" />
+                                        <x-jangkeyte::forms.select name="nguoi_chuyen" label="Người chuyển" icon="fa-solid fa-people-arrows" :options="$danh_sach_nhan_vien" :value="auth()->user()->staff->ma_nhan_vien ?? 'F000'" />
                                     </div>
                         
                                     @if(checkRoute('/customer')) 
@@ -131,12 +131,12 @@
                                 <div class="row g-2">     
                                     <!-- Nhân viên -->
                                     <div class="col-md-6 form-floating mb-3">
-                                        <x-jangkeyte::forms.select name="nhan_vien" label="Người phụ trách" icon="fa-solid fa-people-arrows" :options="$danh_sach_nhan_vien" :value="auth()->user()->staff->ma_nhan_vien" />
+                                        <x-jangkeyte::forms.select name="nhan_vien" label="Người phụ trách" icon="fa-solid fa-people-arrows" :options="$danh_sach_nhan_vien" :value="auth()->user()->staff->ma_nhan_vien ?? 'F000'" />
                                     </div>
 
                                     <!-- Cửa hàng -->
                                     <div class="col-md-6 form-floating mb-3">
-                                        <x-jangkeyte::forms.select name="cua_hang" label="Cửa hàng" icon="fa-solid fa-store" :options="$cua_hang" />
+                                        <x-jangkeyte::forms.select name="cua_hang" label="Cửa hàng" icon="fa-solid fa-store" :options="$cua_hang" :value="auth()->user()->staff->cua_hang ?? '000'" />
                                     </div>                        
                                 </div>
                             </div>

@@ -4,10 +4,13 @@ namespace Modules\Customer\src\Repositories\Customer;
 
 use Modules\Customer\src\Models\Customer;
 use Modules\Customer\src\Filters\CustomerFilter;
+use Modules\Customer\src\Imports\CustomersImport;
 use Modules\Customer\src\Repositories\BaseRepository;
 use Illuminate\Database\DatabaseManager;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class CustomerRepository extends BaseRepository implements CustomerRepositoryInterface
 {
@@ -125,8 +128,63 @@ class CustomerRepository extends BaseRepository implements CustomerRepositoryInt
         return Customer::where('ma_khach_hang', $ma_khach_hang)->delete();
     }
 
-/*
+    /**
+     * Import customers from file upload
+     *
+     * @param request
+     * @return bool
+     */
+    public function import(Request $request)
+    {
+        try {
+            $root_folder = 'uploads/data/';
+            $fileName = $this->upload_file($request, 'customer', $root_folder);
+            $import = new CustomersImport;
+            Excel::import(new $import, $root_folder . $fileName);
+        } catch (\Maatwebsite\Excel\Validators\ValidationException $e) {
+             $failures = $e->failures();
+             
+             foreach ($failures as $failure) {
+                 $failure->row(); // row that went wrong
+                 $failure->attribute(); // either heading key (if using heading row concern) or column index
+                 $failure->errors(); // Actual error messages from Laravel validator
+                 $failure->values(); // The values of the row that has failed.
+             }
+             return $failure;
+        }
+        return $import->getRowCount();
+    }
+    
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function upload_file(Request $request, $type, $root_folder)
+    {
+        
+        $request->validate([
+            'file' => 'required|mimes:pdf,xlsx,xlx,csv|max:204800',
+        ]);
+        $fileName = date("YmdHis",time()).'_'.$type.'.'.$request->file->extension();       
+        $request->file->move(public_path($root_folder), $fileName);   
+        return $fileName;
+   
+    }
+    
+    /**
+     * Tự động đặt lại encoding excel import theo encoding kiểm tra được của dữ liệu.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    function setInputEncoding($file) {
+        $fileContent = file_get_contents($file->path());
+        $enc = mb_detect_encoding($fileContent, mb_list_encodings(), true);
+        
+        \Config::set('excel.imports.csv.input_encoding', $enc);
+    }
 
+    /*
     // Cập nhật trạng thái Khách hàng theo Mã Khách hàng
     public function updateCustomerStatusByID($ma_khach_hang, $tinh_trang=0)
     {
@@ -138,5 +196,5 @@ class CustomerRepository extends BaseRepository implements CustomerRepositoryInt
     {
         return Customer::SauBan($loai_khach)->GetCustomerByRole()->TimNhanh($keyword)->get();
     }
-*/
+    */
 }

@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class DateTime extends Component
+class Datetime extends Component
 {
     /**
      * Create the component instance.
