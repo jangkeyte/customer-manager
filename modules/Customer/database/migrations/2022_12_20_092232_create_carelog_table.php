@@ -15,11 +15,12 @@ return new class extends Migration
     {
         Schema::create('ktgiang_carelog', function (Blueprint $table) {
             $table->id();
-            $table->char('khach_hang', 20);
+            $table->char('khach_hang', 36);
             $table->char('nhan_vien', 6)->nullable();
             $table->string('noi_dung', 400)->nullable();
             $table->tinyInteger('loai_cham_soc')->nullable();
             $table->tinyInteger('tinh_trang')->default(1);
+            $table->string('hanh_dong_tiep_theo', 400)->nullable();
             $table->datetime('ngay_thuc_hien')->nullable();
             $table->timestamps();
         });

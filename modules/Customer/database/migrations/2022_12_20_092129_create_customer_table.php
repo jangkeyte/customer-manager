@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('ktgiang_customer', function (Blueprint $table) {
             $table->id();
-            $table->char('ma_khach_hang', 20)->unique();
+            $table->char('ma_khach_hang', 36)->unique();
             $table->string('ten_khach_hang', 80)->nullable();//
             $table->tinyInteger('gioi_tinh')->nullable();//
             $table->string('dia_chi', 400)->nullable();//

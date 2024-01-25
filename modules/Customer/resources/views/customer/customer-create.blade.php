@@ -30,7 +30,7 @@
                                     
                                     <!-- Tên khách hàng -->
                                     <div class="col-md-4 mb-3">
-                                        <x-jangkeyte::forms.text name="ten_khach_hang" label="Tên khách hàng" icon="fa fa-user" />
+                                        <x-jangkeyte::forms.text name="ten_khach_hang" label="Tên khách hàng" icon="fa fa-user" required="required" />
                                     </div>
 
                                     <!-- Số điện thoại -->

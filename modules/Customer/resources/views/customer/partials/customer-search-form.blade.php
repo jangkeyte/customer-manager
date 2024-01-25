@@ -31,8 +31,13 @@
                         </div>
                     @endif
                     
-                    <!-- Nguồn khách -->
+                    <!-- Tình trạng -->
                     <div class="col-md-2 form-floating mb-3">
+                        <x-jangkeyte::forms.select name="tinh_trang" label="Tình trạng" :options="$tinh_trang" />
+                    </div>
+
+                    <!-- Nguồn khách -->
+                    <div class="col-md-1 form-floating mb-3">
                         <x-jangkeyte::forms.select name="nguon_khach" label="Nguồn khách" :options="$nguon_khach" />
                     </div>
 
