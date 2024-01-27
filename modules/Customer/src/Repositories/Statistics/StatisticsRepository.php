@@ -63,7 +63,7 @@ class StatisticsRepository extends BaseRepository implements StatisticsRepositor
         $statistics['store'] = $this->getStoreListWithCount();
         $statistics['user'] = $this->getUserListWithCount();
         $statistics['source'] = $this->getSourceListWithCount();
-        $statistics['channel'] = $this->getSourceListWithCount();
+        $statistics['channel'] = $this->getChannelListWithCount();
         $statistics['date'] = $this->getDateListWithCount();
         /*
         $totals = DB::table('subscribers')
@@ -119,6 +119,17 @@ class StatisticsRepository extends BaseRepository implements StatisticsRepositor
             ->get();
 
         return $this->getResultOfObject($countList, 'nguon_khach', 'name');
+    }
+    
+    // Lấy danh sách kênh liên hệ với số lượng Khách hàng
+    public function getChannelListWithCount()
+    {
+        $countList = Customer::join('ktgiang_channel', 'ktgiang_customer.nguon_khach', '=', 'ktgiang_channel.channel')
+            ->select(DB::raw("COUNT(*) AS so_khach, ktgiang_customer.nguon_khach, ktgiang_channel.name"))
+            ->groupBy('ktgiang_customer.nguon_khach', 'ktgiang_channel.name')
+            ->get();
+
+        return $this->getResultOfObject($countList, 'kenh_lien_he', 'name');
     }
     
     // Lấy danh sách tháng năm với số lượng Khách hàng

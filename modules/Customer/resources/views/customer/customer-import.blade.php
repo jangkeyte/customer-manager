@@ -4,7 +4,7 @@
 
 @section('entry_content')
 
-    @if(auth()->user()->can('add-customer'))
+    @if(auth()->user()->can('import-customer'))
                 
         <div class="py-4">
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
