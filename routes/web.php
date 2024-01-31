@@ -14,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return auth()->check() ?? redirect()->route('login');
+    return auth()->check() ? redirect()->route('client') : redirect()->route('login') ;
 });
 
