@@ -1,12 +1,12 @@
 @extends('Customer::master')
 
-@section('title', 'Cập nhật thông tin khách hàng')
+@section('title', 'Danh sách khách hàng')
 
 @section('entry_content')
 
     @include('Customer::customer.partials.customer-search-form')
 
-    <p>Khách hàng [{{$customers->count()}}] 
+    <p>Khách hàng [{{$customers->total()}}] 
         <button id="btnHide" class="btn btn-sm btn-outline-primary" style="float:right">Thu gọn</button>
         <a href="{{ route( substr(Route::current()->getPrefix(), 1) . '.create' ) }}" class="btn btn-sm btn-outline-success mx-2" style="float:right"><i class="fa fa-user-plus"></i> Tạo mới</a>
     </p>
@@ -66,8 +66,7 @@
                     <tr>                
                     @if ($loop->count > 0)
                         <td class="text-center">
-                            {{ $loop->index + 1 }}
-                            {{-- $loop->index + 1 + (( $customers->currentPage() - 1 ) * $customers->perPage()) --}}
+                            {{ $loop->index + 1 + (( $customers->currentPage() - 1 ) * $customers->perPage()) }}
                         </td>
                         <td><x-customer::action name="action" label="Chọn" :options="collect(array( 'id' => $customer->ma_khach_hang ))" /></td>
                         <td><span class="position-relative">{{ $customer->ten_khach_hang }} 

@@ -37,7 +37,7 @@ class CustomerRepository extends BaseRepository implements CustomerRepositoryInt
     {
         return $this->model
             ->orderBy('ngay_nhap', 'desc')
-            ->paginate(20);
+            ->paginate(30);
     }
 
     // Lấy thông tin Khách hàng theo Mã Khách hàng
