@@ -34,6 +34,9 @@ interface StatisticsRepositoryInterface extends RepositoryInterface
     // Lấy danh sách Nguồn khách với số lượng Khách hàng
     public function getSourceListWithCount();
 
+    // Lấy danh sách kênh liên hệ với số lượng Khách hàng
+    public function getChannelListWithCount();
+
     // Lấy danh sách tháng năm với số lượng Khách hàng
     public function getDateListWithCount();
 
