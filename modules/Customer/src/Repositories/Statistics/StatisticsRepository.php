@@ -124,9 +124,9 @@ class StatisticsRepository extends BaseRepository implements StatisticsRepositor
     // Lấy danh sách kênh liên hệ với số lượng Khách hàng
     public function getChannelListWithCount()
     {
-        $countList = Customer::join('ktgiang_channel', 'ktgiang_customer.nguon_khach', '=', 'ktgiang_channel.channel')
-            ->select(DB::raw("COUNT(*) AS so_khach, ktgiang_customer.nguon_khach, ktgiang_channel.name"))
-            ->groupBy('ktgiang_customer.nguon_khach', 'ktgiang_channel.name')
+        $countList = Customer::join('ktgiang_channel', 'ktgiang_customer.kenh_lien_he', '=', 'ktgiang_channel.channel')
+            ->select(DB::raw("COUNT(*) AS so_khach, ktgiang_customer.kenh_lien_he, ktgiang_channel.name"))
+            ->groupBy('ktgiang_customer.kenh_lien_he', 'ktgiang_channel.name')
             ->get();
 
         return $this->getResultOfObject($countList, 'kenh_lien_he', 'name');

@@ -21,7 +21,7 @@ Route::get('/storage',  [CustomerController::class, 'index'])->middleware(['auth
 Route::get('/cavet',  [CustomerController::class, 'index'])->middleware(['auth', 'verified'])->name('cavet');
 
 Route::get('/dashboard', function () {
-    return "<h1>Hello World</h1>";
+    return redirect(route('client'));
 })->name('dashboard');
 
 Route::get('/customer-dashboard',  [CustomerController::class, 'index'])->middleware(['auth', 'verified'])->name('customer-dashboard');
