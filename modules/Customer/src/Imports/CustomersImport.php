@@ -29,7 +29,6 @@ class CustomersImport implements ToModel, WithHeadingRow, WithChunkReading, With
     public function model(array $row)
     {
         ++$this->rows;
-
         return new Customer([
             'ma_khach_hang' => !empty($row['ma_khach_hang']) ? $row['ma_khach_hang'] : uniqid(),
             'ten_khach_hang' => $row['ten_khach_hang'] ?? NULL,
@@ -41,8 +40,8 @@ class CustomersImport implements ToModel, WithHeadingRow, WithChunkReading, With
             'kenh_lien_he' => $row['kenh_lien_he'] ?? config('customer.default.kenh_lien_he'),
             'cach_lay_so' => $row['cach_lay_so'] ?? config('customer.default.cach_lay_so'),
             'loai_xe' => $row['loai_xe'] ?? config('customer.default.loai_xe'),
-            'thoi_gian_nhan' => isset($row['ngay_nhan'])  && $row['ngay_nhan'] != '' ? $this->convertExcelDatetime((float)$row['ngay_nhan'] + (float)$row['gio_nhan'], "Y-m-d H:i:s") : date('Y-m-d H:i:s'),
-            'thoi_gian_chuyen' => isset($row['ngay_chuyen']) && $row['ngay_chuyen'] != '' ? $this->convertExcelDatetime((float)$row['ngay_chuyen'] + (float)$row['gio_chuyen'], "Y-m-d H:i:s") : date('Y-m-d H:i:s'),
+            'thoi_gian_nhan' => !empty($row['ngay_nhan']) ? $this->convertExcelDatetime((float)$row['ngay_nhan'], "Y-m-d H:i:s") : date('Y-m-d H:i:s'),
+            'thoi_gian_chuyen' => !empty($row['ngay_chuyen']) ? $this->convertExcelDatetime((float)$row['ngay_chuyen'], "Y-m-d H:i:s") : date('Y-m-d H:i:s'),
             'nguoi_chuyen' => $row['nguoi_chuyen'] ?? (auth()->user()->uid ?? config('customer.default.nguoi_chuyen')),
             'nhu_cau' => $row['nhu_cau'] ?? config('customer.default.nhu_cau'),
             'so_khung' => $row['so_khung'] ?? NULL,
@@ -52,8 +51,10 @@ class CustomersImport implements ToModel, WithHeadingRow, WithChunkReading, With
             'cua_hang' => $row['cua_hang'] ?? auth()->user()->staff->cua_hang ?? config('customer.default.cua_hang'),
             'tinh_trang' => !empty($row['tinh_trang']) ? $row['tinh_trang'] : 0,
             'loai_khach' => !empty($row['loai_khach']) ? $row['loai_khach'] : 0,
-            'ngay_nhap' => !empty($row['ngay_mua']) ? $this->convertExcelDate((float)$row['ngay_mua'], "Y-m-d H:i:s") : (!empty($row['ngay_lien_he']) ? $this->convertExcelDate((float)$row['ngay_lien_he'], "Y-m-d H:i:s") : date('Y-m-d H:i:s')),
-            'ghi_chu' => $row['ghi_chu'] ?? config('customer.default.ghi_chu')
+            'ngay_nhap' => !empty($row['ngay_nhap']) ? $this->convertExcelDatetime((float)$row['ngay_nhap'], "Y-m-d H:i:s") : date('Y-m-d H:i:s'),
+            'ghi_chu' => $row['ghi_chu'] ?? config('customer.default.ghi_chu'),
+            'created_at' => !empty($row['created_at']) ? $this->convertExcelDatetime((float)$row['created_at'], "Y-m-d H:i:s") : date('Y-m-d H:i:s'),
+            'updated_at' => !empty($row['updated_at']) ? $this->convertExcelDatetime((float)$row['updated_at'], "Y-m-d H:i:s") : date('Y-m-d H:i:s')
         ]);
     }
 
@@ -76,14 +77,14 @@ class CustomersImport implements ToModel, WithHeadingRow, WithChunkReading, With
         return checkdate($date['month'], $date['day'], $date['year']);
     }
 
-    public function convertExcelDate(float $dateString, string $dateOutput)
+    public function convertExcelDate(float $dateString, string $dateOutput = "Y-m-d")
     {
         return date($dateOutput, strtotime(( $dateString - 25569 ) * 86400));
     }
 
-    public function convertExcelDatetime(float $dateString, string $dateOutput)
+    public function convertExcelDatetime(float $dateString, string $dateOutput = "Y-m-d H:i:s")
     {
-        return date($dateOutput, strtotime(( $dateString - 25569) * 86400) - 25200);
+        return date( $dateOutput, (( $dateString - 25569 ) * 86400 ) - 25200 );
     }
 
     public function rules(): array
@@ -97,6 +98,17 @@ class CustomersImport implements ToModel, WithHeadingRow, WithChunkReading, With
             },
             'loai_khach' => Rule::in(['0','1']),
             'tinh_trang' => Rule::in(['0','1','2','3','4','5','6']),
+            
+            'ngay_nhap' => function($attribute, $value, $onFailure) {                
+                try {
+                    if ((! is_string($value) && ! is_numeric($value)) || strtotime($value) === false) {
+                        $onFailure(':attribute không đúng định dạng cho phép, phải là dd/mm/yyyy hh:mm:ss');
+                    }
+                } catch (Exception $e) {
+                    $onFailure(':attribute không hợp lệ, phải là dd/mm/yyyy hh:mm:ss');
+                }
+            },
+            
             'loai_khach' => function($attribute, $value, $onFailure) {
                 if ( $value != "" && !is_numeric($value)) {
                     $onFailure(':attribute không chính xác, phải là số 0 hoặc 1');

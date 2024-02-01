@@ -83,7 +83,7 @@
                         <td class="text-center">{{ $customer->source->name ?? 'Chưa có' }}</td>
                         <td class="text-center">{{ $customer->channel->name ?? 'Chưa có' }}</td>
 
-                        <td>{{ date('d/m/Y H:i:s', strtotime($customer->thoi_gian_nhan)) }}</td>
+                        <td>{{ date('d/m/Y H:i:s', strtotime($customer->ngay_nhap)) }}</td>
                         <td class="text-center"><span class="badge rounded-pill bg-{{ $customer->status->code ?? 'light text-dark' }} text-uppercase p-1 px-3">{{ $customer->status->name ?? 'không xác định' }}</span></td>
 
                         @if(checkRoute('/customer')) 
