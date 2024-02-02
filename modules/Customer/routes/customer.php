@@ -1,6 +1,7 @@
 <?php
 
 use Modules\Customer\src\Http\Controllers\CustomerController;
+use Modules\Customer\src\Http\Controllers\StatisticsController;
 use Modules\Customer\src\Http\Controllers\Customer\CreateCustomerController;
 use Modules\Customer\src\Http\Controllers\Customer\UpdateCustomerController;
 use Modules\Customer\src\Http\Controllers\Customer\RemoveCustomerController;
@@ -10,6 +11,8 @@ use Modules\Customer\src\Http\Controllers\Customer\ImportCustomerController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('web')->group(function () {
+
+    Route::get('/dashboard', [StatisticsController::class, 'create'])->name('statistics');
 
     Route::group(['prefix' => 'customer', 'middleware' => 'auth'], function () {
         

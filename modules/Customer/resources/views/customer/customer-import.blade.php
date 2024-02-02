@@ -49,7 +49,7 @@
                                 </div>
                             </div>
                         </form>
-
+                        <dev class="col-12">Tải về <a href="/storage/uploads/customer_template.xlsx" target="_blank">file mẫu</a></div>
                         <!--
                         <form method="POST" action="{{ route('nhapchamsockhach') }}" enctype="multipart/form-data">
                             @csrf

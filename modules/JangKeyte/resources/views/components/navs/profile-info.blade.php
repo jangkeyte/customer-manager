@@ -6,7 +6,7 @@
 	<div id="user-link-container" class="dropdown-list bottom-right"><span class="app-version">Phiên bản : v1.2.4</span>
 		<div class="dropdown-container">
 			<ul>
-				<li><a href="{{ route('user.detail', auth()->user()->id) }}">Tài khoản của tôi</a></li>
+				<li><a href="{{ route('user.detail', auth()->user()->id ?? 1) }}">Tài khoản của tôi</a></li>
 				<li>
         			{{ html()->form('GET')->route('user.logout')->id('adminLogout')->open() }}
 						<input type="hidden" name="_method" value="DELETE">

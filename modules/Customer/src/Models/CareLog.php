@@ -40,7 +40,7 @@ class CareLog extends Model
      */
     public function user()
     {
-    	return $this->belongsto('Modules\Customer\src\Models\User', 'ma_nhan_vien', 'nhan_vien');
+    	return $this->belongsto('Modules\Authetication\src\Models\User', 'ma_nhan_vien', 'nhan_vien');
     }
 
     /**

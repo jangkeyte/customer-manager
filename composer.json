@@ -11,6 +11,7 @@
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
         "laravelcollective/html": "^6.4",
+        "laraveldaily/laravel-charts": "^0.2.3",
         "livewire/livewire": "^3.3",
         "maatwebsite/excel": "^3.1",
         "spatie/laravel-html": "^3.3",
