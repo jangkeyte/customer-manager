@@ -62,6 +62,30 @@ class CustomerController extends Controller
     }
 
     /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function get()
+    {        
+        $customers = $this->customerRepository->getCustomers();
+        //dd($customers->first());
+        return $customers->values()->toJson();
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function getMore($rows, $offset)
+    {        
+        $customers = $this->customerRepository->getCustomers($rows, $offset);
+        //dd($customers->first());
+        return $customers->values()->toJson();
+    }
+
+    /**
      * Show the form for editing the specified resource.
      *
      * @param  int  $id

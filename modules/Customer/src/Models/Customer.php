@@ -96,7 +96,7 @@ class Customer extends Model
     public function source()
     {
         // return $this->belongsto('App\Models\Staff', 'foreign_key', 'local_key');
-    	return $this->belongsto('Modules\Customer\src\Models\Source', 'nguon_khach', 'source');
+    	return $this->belongsto('Modules\Customer\src\Models\Source', 'nguon_khach', 'source')->select('id', 'name', 'source');
     }
 
     /**

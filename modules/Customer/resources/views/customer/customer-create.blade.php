@@ -131,6 +131,7 @@
                                 <div class="row g-2">     
                                     <!-- Nhân viên -->
                                     <div class="col-md-6 form-floating mb-3">
+                                        @include('Customer::customer.elements.staff')
                                         <x-jangkeyte::forms.select name="nhan_vien" label="Người phụ trách" icon="fa-solid fa-people-arrows" :options="$danh_sach_nhan_vien" :value="auth()->user()->staff->ma_nhan_vien ?? 'F000'" />
                                     </div>
 

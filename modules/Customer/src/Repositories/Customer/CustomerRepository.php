@@ -33,11 +33,9 @@ class CustomerRepository extends BaseRepository implements CustomerRepositoryInt
     }
 
     // Lấy danh sách toàn bộ Khách hàng
-    public function getCustomers()
+    public function getCustomers($rows=1000, $offset=0)
     {
-        return $this->model
-            ->orderBy('ngay_nhap', 'desc')
-            ->paginate(30);
+        return $this->model->with('source', 'channel:id,name,channel', 'status:id,name,status', 'staff:id,ten_nhan_vien,ma_nhan_vien', 'carelogs:id,khach_hang,noi_dung,ngay_thuc_hien')->limit($rows)->offset($offset)->get();
     }
 
     // Lấy thông tin Khách hàng theo Mã Khách hàng

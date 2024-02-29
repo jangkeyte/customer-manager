@@ -18,7 +18,8 @@
     <link href="{{ asset('/assets/css/styles.css') }}" rel="stylesheet">
     <link href="{{ asset('/assets/css/admin.css') }}" rel="stylesheet">
     <link href="{{ asset('/assets/css/ui.css') }}" rel="stylesheet">
-    <link href="{{ asset('/assets/css/jquery.dataTables.min.css') }}" rel="stylesheet">
+    <!-- <link href="{{ asset('/assets/css/jquery.dataTables.min.css') }}" rel="stylesheet"> -->
+    <link href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css" rel="stylesheet" type="text/css">
     <!-- <link href="{{ asset('/assets/css/jkanban.min.css') }}" rel="stylesheet"> -->
     
     @stack('styles')
@@ -47,10 +48,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <!-- Theme script -->
-    <script type="text/javascript" src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript"></script>
+    <!-- <script type="text/javascript" src="{{ asset('assets/js/jquery.dataTables.min.js') }}"></script> -->
     <!-- <script type="text/javascript" src="{{ asset('assets/js/jkanban.min.js') }}"></script> -->
     <script type="text/javascript" src="{{ asset('assets/js/scripts.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('assets/js/admin.js') }}"></script>
+    <!-- <script type="text/javascript" src="{{ asset('assets/js/admin.js') }}"></script> -->
     <script type="text/javascript" src="{{ asset('assets/js/ui.js') }}"></script>
     @stack('scripts')
 </body>
